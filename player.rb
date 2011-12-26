@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+
+require 'deck'
+
+class Player
+  attr_accessor :name, :cards, :dealer, :type
+  
+  def initialize(name, dealer)
+    @name = name
+    @cards = []
+    @dealer = dealer
+  end
+  
+  def draw_card
+    @cards << @dealer.draw_card
+  end
+  
+  def play_card(top_card)
+    result = which_card(top_card)
+    if top_card.internal_value == 14 # Draw Four
+      1.upto(4) do
+        @cards << @dealer.draw_card
+        puts "Player #{name} drew a #{@cards.last.to_s} and has #{@cards.length} cards"
+      end
+    elsif top_card.internal_value == 12 # Draw Two
+      1.upto(2) do
+        @cards << @dealer.draw_card
+        puts "Player #{name} drew a #{@cards.last.to_s} and has #{@cards.length} cards"
+      end
+    elsif result.nil? # Can't play?
+      draw_card
+      puts "Player #{name} drew a #{@cards.last.to_s} and has #{@cards.length} cards"
+      result = which_card(top_card)
+    end
+    @cards.delete(result) unless result.nil?
+    return result unless result.nil?
+  end
+  
+  def which_card(top_card)
+    color_playable = @cards.find_all {|card| card.color == top_card.color }
+    like_playable = @cards.find_all {|card| card.internal_value == top_card.internal_value }
+    wild_cards = @cards.find_all {|card| card.color == 4 }
+    color_playable = color_playable.sort_by {|card| card.point_value } unless color_playable.empty?
+    like_playable = like_playable.sort_by {|card| card.point_value } unless (like_playable.empty? or top_card.point_value == 50)
+    wild_cards = wild_cards.sort_by {|card| card.internal_value } unless wild_cards.empty?
+    return color_playable.last unless color_playable.empty?
+    return like_playable.last unless (like_playable.empty? or top_card.point_value == 50)
+    wild_card = wild_cards.first unless wild_cards.empty?
+    wild_card.color = preferred_color unless wild_card.nil?
+    return wild_card unless wild_card.nil?
+  end
+  
+  def preferred_color
+    colors = {}
+    (0..4).each do |color|
+      colors[color] = 0
+    end
+    @cards.collect {|card| colors[card.color] += card.point_value }
+    # nil out black, 'cause we don't want to pick it
+    colors.delete(4)
+    colors = colors.sort_by {|color, val| val}
+    puts "Player #{name} played wild card and prefers #{COLORS[colors.last[0]]}"
+    colors.last[0]
+  end
+end
