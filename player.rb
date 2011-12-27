@@ -11,25 +11,15 @@ class Player
     @dealer = dealer
   end
   
-  def draw_card
+  def draw_card(num_cards = 1)
     @cards << @dealer.draw_card
   end
   
   def play_card(top_card)
     result = which_card(top_card)
-    if top_card.internal_value == 14 # Draw Four
-      1.upto(4) do
-        @cards << @dealer.draw_card
-        puts "Player #{name} drew a #{@cards.last.to_s} and has #{@cards.length} cards"
-      end
-    elsif top_card.internal_value == 12 # Draw Two
-      1.upto(2) do
-        @cards << @dealer.draw_card
-        puts "Player #{name} drew a #{@cards.last.to_s} and has #{@cards.length} cards"
-      end
-    elsif result.nil? # Can't play?
+    if result.nil? # Can't play?
       draw_card
-      puts "Player #{name} drew a #{@cards.last.to_s} and has #{@cards.length} cards"
+      to_s
       result = which_card(top_card)
     end
     @cards.delete(result) unless result.nil?
@@ -59,7 +49,25 @@ class Player
     # nil out black, 'cause we don't want to pick it
     colors.delete(4)
     colors = colors.sort_by {|color, val| val}
-    puts "Player #{name} played wild card and prefers #{COLORS[colors.last[0]]}"
+    puts "Player #{name.red.bold} played wild card and prefers #{COLORS[colors.last[0]].send(COLORS[colors.last[0]].downcase).bold}"
     colors.last[0]
+  end
+  
+  def points
+    @total_points = 0
+    @cards.collect {|card| @total_points += card.point_value }
+    @total_points
+  end
+  
+  def to_s
+    if @cards.empty?
+      "Player " + @name.red.bold + " has no cards"
+    else 
+      result = "Player " + @name.red.bold + " Has " + @cards.length.to_s + " cards:  "
+      @cards.each do |card|
+        result += card.to_s + " "
+      end
+      result
+    end
   end
 end

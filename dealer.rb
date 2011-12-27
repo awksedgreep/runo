@@ -3,14 +3,20 @@
 require 'player'
 require 'deck'
 
+# to play
+# game = Dealer.new('Mark', 'Wesley', 'Josh', 'Mingjia')
+
 class Dealer
-  attr_accessor :deck, :players, :direction, :turn, :skip, :current_player, :total_players
+  attr_accessor :deck, :players, :direction, :turn, :current_player
+  attr_accessor :total_players, :total_points, :game_start, :game_finish
   
   def initialize(*players)
+    @game_start = Time.now
     @winner = false
     @deck = Deck.new(players.length / 8)
     @deck.shuffle
     @direction = 1 # start with forward direction
+    @direction_name = 'Forward'
     puts "Shuffling Deck: #{@deck.length} cards"
     @players = []
     players.each do |player|
@@ -22,24 +28,42 @@ class Dealer
         player.draw_card
       end
     end
-    @discard = []
-    @discard << @deck.draw_card
-    # if wild card have first player pick color
-    @discard.first.color = @players.first.preferred_color if @discard.first.color == 4
+    @top_card = @deck.draw_card
     @total_players = @players.length
     @current_player = 0
+    @player = @players[@current_player]
+    # if reverse or skip handle first card
+    change_direction if @top_card.internal_value == 10 # 10 = Reverse
+    increment_player if @top_card.internal_value == 11 # 11 = Skip
+    # if wild card have first player pick color
+    @top_card.color = @player.preferred_color if @top_card.color == 4
     while !@winner
-      #@players.each do |player|
-      player = @players[@current_player]
-      puts "It's #{player.name}'s Turn"
-      puts "Top card #{@discard.last.to_s}"
-      lay_down = player.play_card(@discard.last)
-      @discard << lay_down unless lay_down.nil?
-      puts "Player #{player.name} played #{lay_down.to_s}" unless lay_down.nil?
-      puts "Player #{player.name} could not lay down" if lay_down.nil?
-      puts "Player #{player.name} now has #{player.cards.length} cards"
-      if player.cards.length == 0
-        winner(player)
+      if @top_card.penalized.nil?
+        if @top_card.internal_value == 14 # Draw Four
+          puts "Player #{@player.name.red.bold} drawing 4 cards"
+          @player.draw_card(4)
+          @top_card.penalized = true
+          increment_player
+        elsif @top_card.internal_value == 12 # Draw Two
+          puts "Player #{@player.name.red.bold} drawing 2 cards"
+          @player.draw_card(2)
+          @top_card.penalized = true
+          increment_player
+        end
+      end
+      puts "It's #{(@player.name + "'s").red.bold} Turn: Direction = " + @direction_name.blue.bold
+      puts "Before turn:"
+      puts @player.to_s
+      puts "Top card #{@top_card.to_s}"
+      lay_down = @player.play_card(@top_card)
+      @top_card = lay_down unless lay_down.nil?
+      puts "Player #{@player.name.red.bold} played #{lay_down.to_s}" unless lay_down.nil?
+      puts "Player #{@player.name.red.bold} could not lay down" if lay_down.nil?
+      puts "Player #{@player.name.red.bold} now has #{@player.cards.length} cards"
+      puts "After turn:"
+      puts @player.to_s
+      if @player.cards.length == 0
+        winner
         break
       end
       if @deck.length <= 3
@@ -47,11 +71,16 @@ class Dealer
         @deck = Deck.new(@players.length / 8)
         @deck.shuffle
       end
-      unless lay_down.nil?
-        @skip = true if lay_down.internal_value == 11 # 11 = Skip
-        change_direction if lay_down.internal_value == 12 # 12 = Reverse
+      if @top_card.penalized.nil?
+        if @top_card.internal_value == 10 # Reverse
+          change_direction
+          @top_card.penalized = true
+        elsif @top_card.internal_value == 11 # Skip
+          increment_player
+          @top_card.penalized = true
+        end
       end
-      next_turn
+      increment_player
     end
   end
   
@@ -59,30 +88,39 @@ class Dealer
     @deck.draw_card
   end
   
-  def next_turn
-    if @skip
-      @skip = false
-      get_next_player_id
-      next_turn
-    else
-      get_next_player_id
-    end
-  end
-  
-  def get_next_player_id
+  def increment_player
     @current_player = @current_player + @direction
     @current_player = (@total_players - 1) if @current_player < 0
     @current_player = 0 if @current_player >= @total_players
+    @player = @players[@current_player]
     @current_player
   end
   
   def change_direction
-    @direction = 1 if @direction == -1
-    @direction = -1 if @direction == 1
+    puts "Reversing Direction"
+    if @direction == 1
+      @direction = -1
+      @direction_name = 'Reverse'
+    else
+      @direction = 1
+      @direction_name = 'Forward'
+    end
   end
   
-  def winner(player)
-    puts "Player #{player.name} Won!"
+  def points
+    @total_points = 0
+    @players.collect {|player| @total_points += player.points }
+    @total_points
+  end
+  
+  def winner
+    puts "Player #{@player.name} Won!".red.bold
+    @players.each do |player|
+      puts "Player " + player.name.red.bold + " had " + player.points.to_s + " points."
+    end
+    puts "Total Points: " + points.to_s
     @winner = true
+    @game_end = Time.now
+    puts "Game took " + (@game_end - @game_start).to_s + " seconds."
   end
 end

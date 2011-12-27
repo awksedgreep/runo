@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'rubygems'
+require 'colored'
+
 # face values for internal value
 CARDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'Reverse', 'Skip', 'Draw 2', 'Wild', 'Draw 4']
 COLORS = ['Red', 'Green', 'Blue', 'Yellow', 'Black']
@@ -51,7 +54,7 @@ class Deck
 end
 
 class Card
-  attr_accessor :color, :internal_value
+  attr_accessor :color, :internal_value, :penalized
 
   def initialize(internal_value, color)
     @internal_value = internal_value
@@ -77,6 +80,8 @@ class Card
   end
   
   def to_s
-    "#{face_color}" << " " << "#{face_value}"
+    result = (" #{face_color}" << " " << "#{face_value} ").white.send("on_" + face_color.downcase).bold unless face_color == 'Black'
+    result = (" #{face_color}" << " " << "#{face_value} ").black_on_white.bold if face_color == 'Black'
+    result
   end
 end
