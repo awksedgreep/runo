@@ -80,8 +80,18 @@ class Card
   end
   
   def to_s
-    result = (" #{face_color}" << " " << "#{face_value} ").white.send("on_" + face_color.downcase).bold unless face_color == 'Black'
-    result = (" #{face_color}" << " " << "#{face_value} ").black_on_white.bold if face_color == 'Black'
+    case color
+    when 0 # red
+      result = (" #{face_color}" << " " << "#{face_value} ").white.on_red.bold
+    when 1 # green
+      result = (" #{face_color}" << " " << "#{face_value} ").black.on_green
+    when 2 # blue
+      result = (" #{face_color}" << " " << "#{face_value} ").white.on_blue.bold
+    when 3 # yellow
+      result = (" #{face_color}" << " " << "#{face_value} ").black.on_yellow
+    when 4 # black
+      result = (" #{face_color}" << " " << "#{face_value} ").black_on_white.bold
+    end
     result
   end
 end
