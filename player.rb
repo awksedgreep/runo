@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'deck'
+require './deck'
 
 class Player
   attr_accessor :name, :cards, :dealer, :type

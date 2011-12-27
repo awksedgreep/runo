@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'player'
-require 'deck'
+require './player'
+require './deck'
 
 # to play
 # game = Dealer.new('Mark', 'Wesley', 'Josh', 'Mingjia')

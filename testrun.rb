@@ -1,3 +1,7 @@
+#!/usr/bin/env ruby
+
+require './dealer'
+
 class TestRun
   attr_accessor :game
   
