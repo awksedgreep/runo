@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require_relative 'card'
+
 # face values for internal value
 CARDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'Reverse', 'Skip', 'Draw 2', 'Wild', 'Draw 4'].freeze
 COLORS = %w[Red Green Blue Yellow Black].freeze
@@ -34,8 +36,8 @@ class Deck
       end
       # Four Wilds, no color/black
       (0..3).each do
-        @cards << Card.new(13,BLACK)
-        @cards << Card.new(14,BLACK)
+        @cards << Card.new(13, BLACK)
+        @cards << Card.new(14, BLACK)
       end
     end
   end
@@ -43,7 +45,7 @@ class Deck
   def draw_card
     if @cards.length > 3
       @cards.shift
-    else 
+    else
       # Deck nearly empty, shuffle in new one 
       create_deck(1)
       shuffle
@@ -65,37 +67,5 @@ class Deck
 
   def length
     @cards.length
-  end
-end
-
-# Card class, individual card instances created from this
-class Card
-  attr_accessor :color, :internal_value, :penalized
-
-  def initialize(internal_value, color)
-    @internal_value = internal_value
-    @color = color
-  end
-
-  def point_value
-    return internal_value if face_value.instance_of?(Integer)
-    return 20 if (face_value == 'Reverse') || (face_value == 'Skip') || (face_value == 'Draw 2')
-    50 if (face_value == 'Wild') || (face_value == 'Draw 4')
-  end
-
-  def face_value
-    CARDS[internal_value]
-  end
-
-  def face_color
-    COLORS[color]
-  end
-
-  def sort_val
-    rand(1000)
-  end
-
-  def to_s
-    " #{face_color}" << " " << "#{face_value} "
   end
 end
