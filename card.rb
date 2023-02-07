@@ -21,17 +21,18 @@ class Card
   def point_value
     return internal_value if face_value.instance_of?(Integer)
     return 20 if (face_value == 'Reverse') || (face_value == 'Skip') || (face_value == 'Draw 2')
+
     50 if (face_value == 'Wild') || (face_value == 'Draw 4')
   end
 
   # returns internal value of card
   def face_value
-    CARDS[internal_value]
+    Runo::CARDS[internal_value]
   end
 
   # returns card color
   def face_color
-    COLORS[color]
+    Runo::COLORS[color]
   end
 
   # returns a random number between 0 and 1000, used for shuffling

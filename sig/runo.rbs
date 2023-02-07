@@ -1,0 +1,12 @@
+
+
+module Runo
+  CARDS: [Integer, Integer, Integer, Integer, Integer, Integer,
+          Integer, Integer, Integer, Integer, String, String, String, String, String]
+  COLORS: [String, String, String, String, String]
+  RED: Integer
+  GREEN: Integer
+  BLUE: Integer
+  YELLOW: Integer
+  BLACK: Integer
+end

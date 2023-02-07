@@ -24,7 +24,7 @@ end
 multi_start = Time.now
 
 1.upto(ARGV[0].to_i) do
-  TestRun.new(log: log)
+  TestRun.new(log:)
 end
 
 multi_end = Time.now

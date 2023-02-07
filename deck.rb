@@ -3,26 +3,28 @@
 
 require_relative 'card'
 
-# face values for internal value
-CARDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'Reverse', 'Skip', 'Draw 2', 'Wild', 'Draw 4'].freeze
+module Runo
+  # face values for internal value
+  CARDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'Reverse', 'Skip', 'Draw 2', 'Wild', 'Draw 4'].freeze
 
-# COLOR array with card colors including black
-COLORS = %w[Red Green Blue Yellow Black].freeze
+  # COLOR array with card colors including black
+  COLORS = %w[Red Green Blue Yellow Black].freeze
 
-# Red index is always 0
-RED = 0
+  # Red index is always 0
+  RED = 0
 
-# Green index is always 1
-GREEN = 1
+  # Green index is always 1
+  GREEN = 1
 
-# Blue index is always 2
-BLUE = 2
+  # Blue index is always 2
+  BLUE = 2
 
-# Yellow index is always 3
-YELLOW = 3
+  # Yellow index is always 3
+  YELLOW = 3
 
-# Black index is always 4
-BLACK = 4
+  # Black index is always 4
+  BLACK = 4
+end
 
 # Stack of cards, may be multiple decks actually
 class Deck
@@ -51,8 +53,8 @@ class Deck
       end
       # Four Wilds, no color/black
       (0..3).each do
-        @cards << Card.new(13, BLACK)
-        @cards << Card.new(14, BLACK)
+        @cards << Card.new(13, Runo::BLACK)
+        @cards << Card.new(14, Runo::BLACK)
       end
     end
   end
