@@ -11,8 +11,10 @@ require './dealer'
 
 # Class for running a single game
 class TestRun
+  # store the game object in this
   attr_accessor :game
 
+  # start a test
   def initialize(log:)
     @log = log
     @game = Dealer.new(log: @log, players: %w[Mark Wesley Josh Kim Nick])

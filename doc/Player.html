@@ -112,7 +112,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>cards in his hand</p>
         </div>
       </div>
       <div id="attribute-i-color_playable" class="method-detail">
@@ -122,7 +122,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>matching color playable cards in hand</p>
         </div>
       </div>
       <div id="attribute-i-dealer" class="method-detail">
@@ -132,7 +132,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>current dealer</p>
         </div>
       </div>
       <div id="attribute-i-like_playable" class="method-detail">
@@ -142,7 +142,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>like playable cards in hand</p>
         </div>
       </div>
       <div id="attribute-i-log" class="method-detail">
@@ -152,7 +152,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>logging object</p>
         </div>
       </div>
       <div id="attribute-i-name" class="method-detail">
@@ -162,7 +162,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>player’s name</p>
         </div>
       </div>
       <div id="attribute-i-type" class="method-detail">
@@ -172,7 +172,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>player type</p>
         </div>
       </div>
     </section>
@@ -193,10 +193,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>create new player</p>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File player.rb, line 10</span>
+            <pre><span class="ruby-comment"># File player.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">log:</span>, <span class="ruby-value">name:</span>, <span class="ruby-value">dealer:</span>)
   <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@cards</span> = []
@@ -226,10 +226,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>draw a card from the deck</p>
 
           <div class="method-source-code" id="draw_card-source">
-            <pre><span class="ruby-comment"># File player.rb, line 17</span>
+            <pre><span class="ruby-comment"># File player.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">draw_card</span>(<span class="ruby-identifier">num_cards</span> = <span class="ruby-value">1</span>)
   <span class="ruby-identifier">num_cards</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
     <span class="ruby-ivar">@cards</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@dealer</span>.<span class="ruby-identifier">draw_card</span>
@@ -252,10 +252,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>play a card if you can (color/like match)</p>
 
           <div class="method-source-code" id="play_card-source">
-            <pre><span class="ruby-comment"># File player.rb, line 24</span>
+            <pre><span class="ruby-comment"># File player.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">play_card</span>(<span class="ruby-identifier">top_card</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-identifier">which_card</span>(<span class="ruby-identifier">top_card</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-comment"># Can&#39;t play?</span>
@@ -282,10 +282,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>player currently has cards worth x points</p>
 
           <div class="method-source-code" id="points-source">
-            <pre><span class="ruby-comment"># File player.rb, line 73</span>
+            <pre><span class="ruby-comment"># File player.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">points</span>
   <span class="ruby-ivar">@total_points</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">card</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@total_points</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">card</span>.<span class="ruby-identifier">point_value</span> }
@@ -307,10 +307,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>player just played a wild card and prefers color ?</p>
 
           <div class="method-source-code" id="preferred_color-source">
-            <pre><span class="ruby-comment"># File player.rb, line 60</span>
+            <pre><span class="ruby-comment"># File player.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">preferred_color</span>
   <span class="ruby-identifier">colors</span> = {}
   (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">4</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">color</span><span class="ruby-operator">|</span>
@@ -339,10 +339,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>string representation of player</p>
 
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File player.rb, line 79</span>
+            <pre><span class="ruby-comment"># File player.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-node">&quot;Player #{@name} has no cards&quot;</span>
@@ -370,10 +370,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>determine if player has a card they can play</p>
 
           <div class="method-source-code" id="which_card-source">
-            <pre><span class="ruby-comment"># File player.rb, line 35</span>
+            <pre><span class="ruby-comment"># File player.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">which_card</span>(<span class="ruby-identifier">top_card</span>)
   <span class="ruby-ivar">@color_playable</span> = <span class="ruby-identifier">color_playable</span>(<span class="ruby-identifier">top_card</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@color_playable</span>.<span class="ruby-identifier">last</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@color_playable</span>.<span class="ruby-identifier">empty?</span>
@@ -384,8 +384,7 @@
   <span class="ruby-identifier">wild_cards</span> = <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">card</span><span class="ruby-operator">|</span> <span class="ruby-identifier">card</span>.<span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span> }
   <span class="ruby-identifier">wild_card</span> = <span class="ruby-identifier">wild_cards</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">wild_cards</span>.<span class="ruby-identifier">empty?</span>
   <span class="ruby-identifier">wild_card</span>.<span class="ruby-identifier">color</span> = <span class="ruby-identifier">preferred_color</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">wild_card</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">wild_card</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">wild_card</span>.<span class="ruby-identifier">nil?</span>  <span class="ruby-comment"># Seriously Rubocop? &#39;Might be unitialized&#39; yeah you mean it might be nil?</span>
-
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">wild_card</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">wild_card</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-comment"># Seriously Rubocop? &#39;Might be unitialized&#39; yeah you mean it might be nil?</span>
   <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

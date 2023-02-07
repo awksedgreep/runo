@@ -91,7 +91,7 @@
 
   <section class="description">
     
-<p>to play game = <a href="Dealer.html#method-c-new"><code>Dealer.new</code></a>(‘Mark’, ‘Wesley’, ‘Josh’, ‘Mingjia’)</p>
+<p>to play game = <a href="Dealer.html#method-c-new"><code>Dealer.new</code></a>(log: log, players: [‘Mark’, ‘Wesley’, ‘Josh’, ‘Mingjia’])</p>
 
   </section>
 
@@ -111,7 +111,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>who is the current player</p>
         </div>
       </div>
       <div id="attribute-i-deck" class="method-detail">
@@ -121,7 +121,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>deck array</p>
         </div>
       </div>
       <div id="attribute-i-direction" class="method-detail">
@@ -131,7 +131,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>card play current direction</p>
         </div>
       </div>
       <div id="attribute-i-game_finish" class="method-detail">
@@ -141,7 +141,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>time the game finished</p>
         </div>
       </div>
       <div id="attribute-i-game_start" class="method-detail">
@@ -151,7 +151,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>time the game started</p>
         </div>
       </div>
       <div id="attribute-i-log" class="method-detail">
@@ -161,7 +161,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>logger object</p>
         </div>
       </div>
       <div id="attribute-i-players" class="method-detail">
@@ -171,7 +171,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>player array</p>
         </div>
       </div>
       <div id="attribute-i-total_players" class="method-detail">
@@ -181,7 +181,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>how many players in the current game</p>
         </div>
       </div>
       <div id="attribute-i-total_points" class="method-detail">
@@ -191,7 +191,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>how many total points at end of game</p>
         </div>
       </div>
       <div id="attribute-i-turn" class="method-detail">
@@ -201,7 +201,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>who’s turn is it</p>
         </div>
       </div>
     </section>
@@ -222,10 +222,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>Create dealer, deck, add players</p>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 14</span>
+            <pre><span class="ruby-comment"># File dealer.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">log:</span>, <span class="ruby-value">players:</span>)
   <span class="ruby-ivar">@game_start</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
   <span class="ruby-ivar">@winner</span> = <span class="ruby-keyword">false</span>
@@ -328,10 +328,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>reverse direction</p>
 
           <div class="method-source-code" id="change_direction-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 106</span>
+            <pre><span class="ruby-comment"># File dealer.rb, line 129</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">change_direction</span>
   <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&#39;Reversing Direction&#39;</span> }
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@direction</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
@@ -358,10 +358,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>draw one card from the deck and return it</p>
 
           <div class="method-source-code" id="draw_card-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 94</span>
+            <pre><span class="ruby-comment"># File dealer.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">draw_card</span>
   <span class="ruby-ivar">@deck</span>.<span class="ruby-identifier">draw_card</span>
 <span class="ruby-keyword">end</span></pre>
@@ -381,10 +381,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>next player in the current direction</p>
 
           <div class="method-source-code" id="increment_player-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 98</span>
+            <pre><span class="ruby-comment"># File dealer.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">increment_player</span>
   <span class="ruby-ivar">@current_player</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@direction</span>
   <span class="ruby-ivar">@current_player</span> = (<span class="ruby-ivar">@total_players</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_player</span>.<span class="ruby-identifier">negative?</span>
@@ -408,10 +408,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>points in the remaining players hands</p>
 
           <div class="method-source-code" id="points-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 117</span>
+            <pre><span class="ruby-comment"># File dealer.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">points</span>
   <span class="ruby-ivar">@total_points</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">player</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@total_points</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">player</span>.<span class="ruby-identifier">points</span> }
@@ -433,10 +433,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>return winner of the game</p>
 
           <div class="method-source-code" id="winner-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 123</span>
+            <pre><span class="ruby-comment"># File dealer.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">winner</span>
   <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-node">&quot;Player #{@player.name} Won!&quot;</span> }
   <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">player</span><span class="ruby-operator">|</span>

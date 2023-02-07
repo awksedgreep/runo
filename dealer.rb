@@ -3,14 +3,34 @@
 
 require_relative 'player'
 require_relative 'deck'
+require_relative 'card'
 require 'logger'
 
 # to play
-# game = Dealer.new('Mark', 'Wesley', 'Josh', 'Mingjia')
+# game = Dealer.new(log: log, players: ['Mark', 'Wesley', 'Josh', 'Mingjia'])
 class Dealer
-  attr_accessor :deck, :players, :direction, :turn, :current_player, :log,
-                :total_players, :total_points, :game_start, :game_finish
+  # deck array
+  attr_accessor :deck
+  # player array
+  attr_accessor :players
+  # card play current direction
+  attr_accessor :direction
+  # who's turn is it
+  attr_accessor :turn
+  # who is the current player
+  attr_accessor :current_player
+  # logger object
+  attr_accessor :log
+  # how many players in the current game
+  attr_accessor :total_players
+  # how many total points at end of game
+  attr_accessor :total_points
+  # time the game started
+  attr_accessor :game_start
+  # time the game finished
+  attr_accessor :game_finish
 
+  # Create dealer, deck, add players
   def initialize(log:, players:)
     @game_start = Time.now
     @winner = false
@@ -91,10 +111,12 @@ class Dealer
     end
   end
 
+  # draw one card from the deck and return it
   def draw_card
     @deck.draw_card
   end
 
+  # next player in the current direction
   def increment_player
     @current_player += @direction
     @current_player = (@total_players - 1) if @current_player.negative?
@@ -103,6 +125,7 @@ class Dealer
     @current_player
   end
 
+  # reverse direction
   def change_direction
     @log.info { 'Reversing Direction' }
     if @direction == 1
@@ -114,12 +137,14 @@ class Dealer
     end
   end
 
+  # points in the remaining players hands
   def points
     @total_points = 0
     @players.collect { |player| @total_points += player.points }
     @total_points
   end
 
+  # return winner of the game
   def winner
     @log.warn { "Player #{@player.name} Won!" }
     @players.each do |player|

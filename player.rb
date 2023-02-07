@@ -1,12 +1,27 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require_relative 'deck'
 require 'logger'
 
 # Runo Player
 class Player
-  attr_accessor :name, :cards, :dealer, :type, :log, :color_playable, :like_playable
+  # player's name
+  attr_accessor :name
+  # cards in his hand
+  attr_accessor :cards
+  # current dealer
+  attr_accessor :dealer
+  # player type
+  attr_accessor :type
+  # logging object
+  attr_accessor :log
+  # matching color playable cards in hand
+  attr_accessor :color_playable
+  # like playable cards in hand
+  attr_accessor :like_playable
 
+  # create new player
   def initialize(log:, name:, dealer:)
     @name = name
     @cards = []
@@ -14,6 +29,7 @@ class Player
     @log = log
   end
 
+  # draw a card from the deck
   def draw_card(num_cards = 1)
     num_cards.times do
       @cards << @dealer.draw_card
@@ -21,6 +37,7 @@ class Player
     end
   end
 
+  # play a card if you can (color/like match)
   def play_card(top_card)
     result = which_card(top_card)
     if result.nil? # Can't play?
@@ -32,6 +49,7 @@ class Player
     result unless result.nil?
   end
 
+  # determine if player has a card they can play
   def which_card(top_card)
     @color_playable = color_playable(top_card)
     return @color_playable.last unless @color_playable.empty?
@@ -42,21 +60,23 @@ class Player
     wild_cards = @cards.find_all { |card| card.color == 4 }
     wild_card = wild_cards.first unless wild_cards.empty?
     wild_card.color = preferred_color unless wild_card.nil?
-    return wild_card unless wild_card.nil?  # Seriously Rubocop? 'Might be unitialized' yeah you mean it might be nil?
-
+    return wild_card unless wild_card.nil? # Seriously Rubocop? 'Might be unitialized' yeah you mean it might be nil?
     nil
   end
 
+  # which of my cards match top card
   def color_playable(top_card)
     @log.info { "Color Playable: Top Card Color = #{COLORS[top_card.color]}" }
     @log.info { "Color Playable: #{self.to_s}" }
     @cards.find_all { |card| card.color == top_card.color }
   end
 
+  # which of my cards match value of top card
   def like_playable(top_card)
     @cards.find_all { |card| card.internal_value == top_card.internal_value }
   end
 
+  # player just played a wild card and prefers color ?
   def preferred_color
     colors = {}
     (0..4).each do |color|
@@ -70,12 +90,14 @@ class Player
     colors.last[0]
   end
 
+  # player currently has cards worth x points
   def points
     @total_points = 0
     @cards.collect { |card| @total_points += card.point_value }
     @total_points
   end
 
+  # string representation of player
   def to_s
     if @cards.empty?
       "Player #{@name} has no cards"

@@ -111,7 +111,7 @@
         </div>
 
         <div class="method-description">
-        
+        <p>cards accessor, array of cards in the <a href="Deck.html"><code>Deck</code></a></p>
         </div>
       </div>
     </section>
@@ -132,10 +132,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>Creates a deck or decks and shuffles it/them</p>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File deck.rb, line 19</span>
+            <pre><span class="ruby-comment"># File deck.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">number_of_decks</span> = <span class="ruby-value">1</span>)
   <span class="ruby-ivar">@cards</span> = []
   <span class="ruby-identifier">create_deck</span>(<span class="ruby-identifier">number_of_decks</span>)
@@ -163,10 +163,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>creates a deck or decks and shuffles them</p>
 
           <div class="method-source-code" id="create_deck-source">
-            <pre><span class="ruby-comment"># File deck.rb, line 24</span>
+            <pre><span class="ruby-comment"># File deck.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_deck</span>(<span class="ruby-identifier">number_of_decks</span> = <span class="ruby-value">1</span>)
   (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">number_of_decks</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span>
     <span class="ruby-comment"># Two of each 1-9, Reverse, Skip, Draw 2 in each color</span>
@@ -203,10 +203,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>draw a single card from the deck</p>
 
           <div class="method-source-code" id="draw_card-source">
-            <pre><span class="ruby-comment"># File deck.rb, line 45</span>
+            <pre><span class="ruby-comment"># File deck.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">draw_card</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>
     <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">shift</span>
@@ -233,10 +233,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>iterate over the deck</p>
 
           <div class="method-source-code" id="each_card-source">
-            <pre><span class="ruby-comment"># File deck.rb, line 60</span>
+            <pre><span class="ruby-comment"># File deck.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_card</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
     <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">card</span><span class="ruby-operator">|</span>
@@ -260,10 +260,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>how many cards in the deck</p>
 
           <div class="method-source-code" id="length-source">
-            <pre><span class="ruby-comment"># File deck.rb, line 68</span>
+            <pre><span class="ruby-comment"># File deck.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length</span>
   <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">length</span>
 <span class="ruby-keyword">end</span></pre>
@@ -283,10 +283,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>shuffle the cards in the deck</p>
 
           <div class="method-source-code" id="shuffle-source">
-            <pre><span class="ruby-comment"># File deck.rb, line 56</span>
+            <pre><span class="ruby-comment"># File deck.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">shuffle</span>
   <span class="ruby-ivar">@cards</span> = <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">card</span><span class="ruby-operator">|</span> <span class="ruby-identifier">card</span>.<span class="ruby-identifier">sort_val</span> }
 <span class="ruby-keyword">end</span></pre>
