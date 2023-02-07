@@ -74,6 +74,8 @@
   <ul class="link-list" role="directory">
     <li ><a href="#method-c-new">::new</a>
     <li ><a href="#method-i-draw_card">#draw_card</a>
+    <li ><a href="#method-i-find_color_playable">#find_color_playable</a>
+    <li ><a href="#method-i-find_like_playable">#find_like_playable</a>
     <li ><a href="#method-i-play_card">#play_card</a>
     <li ><a href="#method-i-points">#points</a>
     <li ><a href="#method-i-preferred_color">#preferred_color</a>
@@ -242,6 +244,54 @@
 
       </div>
 
+      <div id="method-i-find_color_playable" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">find_color_playable</span><span
+              class="method-args">(top_card)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>which of my cards match top card</p>
+
+          <div class="method-source-code" id="find_color_playable-source">
+            <pre><span class="ruby-comment"># File player.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_color_playable</span>(<span class="ruby-identifier">top_card</span>)
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Color Playable: Top Card Color = #{COLORS[top_card.color]}&quot;</span> }
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Color Playable: #{self.to_s}&quot;</span> }
+  <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">card</span><span class="ruby-operator">|</span> <span class="ruby-identifier">card</span>.<span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">top_card</span>.<span class="ruby-identifier">color</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-find_like_playable" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">find_like_playable</span><span
+              class="method-args">(top_card)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>which of my cards match value of top card</p>
+
+          <div class="method-source-code" id="find_like_playable-source">
+            <pre><span class="ruby-comment"># File player.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_like_playable</span>(<span class="ruby-identifier">top_card</span>)
+  <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">card</span><span class="ruby-operator">|</span> <span class="ruby-identifier">card</span>.<span class="ruby-identifier">internal_value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">top_card</span>.<span class="ruby-identifier">internal_value</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
       <div id="method-i-play_card" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
@@ -375,10 +425,10 @@
           <div class="method-source-code" id="which_card-source">
             <pre><span class="ruby-comment"># File player.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">which_card</span>(<span class="ruby-identifier">top_card</span>)
-  <span class="ruby-ivar">@color_playable</span> = <span class="ruby-identifier">color_playable</span>(<span class="ruby-identifier">top_card</span>)
+  <span class="ruby-ivar">@color_playable</span> = <span class="ruby-identifier">find_color_playable</span>(<span class="ruby-identifier">top_card</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@color_playable</span>.<span class="ruby-identifier">last</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@color_playable</span>.<span class="ruby-identifier">empty?</span>
 
-  <span class="ruby-ivar">@like_playable</span> = <span class="ruby-identifier">like_playable</span>(<span class="ruby-identifier">top_card</span>)
+  <span class="ruby-ivar">@like_playable</span> = <span class="ruby-identifier">find_like_playable</span>(<span class="ruby-identifier">top_card</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@like_playable</span>.<span class="ruby-identifier">last</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@like_playable</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">top_card</span>.<span class="ruby-identifier">point_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">50</span>)
 
   <span class="ruby-identifier">wild_cards</span> = <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">card</span><span class="ruby-operator">|</span> <span class="ruby-identifier">card</span>.<span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span> }

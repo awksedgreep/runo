@@ -1,0 +1,7 @@
+
+class TestRun
+  @log: Logger
+
+  attr_accessor game: Dealer
+  def initialize: (log: Logger) -> void
+end

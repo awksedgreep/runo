@@ -1,0 +1,3 @@
+class Player
+  @color_playable: untyped
+end

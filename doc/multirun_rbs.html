@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>card.rbs - RDoc Documentation</title>
+<title>multirun.rbs - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -78,21 +78,14 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page card.rbs">
+<main role="main" aria-label="Page multirun.rbs">
 
-<p># TypeProf 0.21.4</p>
+<p>class <a href="TestRun.html"><code>TestRun</code></a></p>
 
-<p># Classes class <a href="Card.html"><code>Card</code></a></p>
+<pre>@log: Logger
 
-<pre>attr_accessor color: Integer
-attr_accessor internal_value: Integer
-attr_accessor penalized: Integer
-def initialize: (Integer internal_value, Integer color) -&gt; void
-def point_value: -&gt; Integer
-def face_value: -&gt; Integer
-def face_color: -&gt; Integer
-def sort_val: -&gt; Integer
-def to_s: -&gt; String</pre>
+attr_accessor game: Dealer
+def initialize: (log: Logger) -&gt; void</pre>
 
 <p>end</p>
 

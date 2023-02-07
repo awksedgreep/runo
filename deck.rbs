@@ -1,0 +1,10 @@
+
+class Deck
+  attr_accessor cards: Array[Card]
+  def initialize: (Integer number_of_decks) -> void
+  def create_deck: (Integer number_of_decks) -> Integer
+  def draw_card: -> nil
+  def shuffle: -> Array[Card]
+  def each_card: -> Card
+  def length: -> Integer
+end

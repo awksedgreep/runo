@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>card.rbs - RDoc Documentation</title>
+<title>deck.rbs - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -78,21 +78,17 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page card.rbs">
+<main role="main" aria-label="Page deck.rbs">
 
-<p># TypeProf 0.21.4</p>
+<p>class <a href="Deck.html"><code>Deck</code></a></p>
 
-<p># Classes class <a href="Card.html"><code>Card</code></a></p>
-
-<pre>attr_accessor color: Integer
-attr_accessor internal_value: Integer
-attr_accessor penalized: Integer
-def initialize: (Integer internal_value, Integer color) -&gt; void
-def point_value: -&gt; Integer
-def face_value: -&gt; Integer
-def face_color: -&gt; Integer
-def sort_val: -&gt; Integer
-def to_s: -&gt; String</pre>
+<pre>attr_accessor cards: Array[Card]
+def initialize: (Integer number_of_decks) -&gt; void
+def create_deck: (Integer number_of_decks) -&gt; Integer
+def draw_card: -&gt; nil
+def shuffle: -&gt; Array[Card]
+def each_card: -&gt; Card
+def length: -&gt; Integer</pre>
 
 <p>end</p>
 

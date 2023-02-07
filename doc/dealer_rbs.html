@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>card.rbs - RDoc Documentation</title>
+<title>dealer.rbs - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -78,21 +78,32 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page card.rbs">
+<main role="main" aria-label="Page dealer.rbs">
 
-<p># TypeProf 0.21.4</p>
+<p>class <a href="Dealer.html"><code>Dealer</code></a></p>
 
-<p># Classes class <a href="Card.html"><code>Card</code></a></p>
+<pre>@winner: bool
+@direction_name: String
+@top_card: Card
+@player: Player
+@game_end: Time
 
-<pre>attr_accessor color: Integer
-attr_accessor internal_value: Integer
-attr_accessor penalized: Integer
-def initialize: (Integer internal_value, Integer color) -&gt; void
-def point_value: -&gt; Integer
-def face_value: -&gt; Integer
-def face_color: -&gt; Integer
-def sort_val: -&gt; Integer
-def to_s: -&gt; String</pre>
+attr_accessor deck: Deck
+attr_accessor players: Array[Player]
+attr_accessor direction: Integer
+attr_accessor turn: Player
+attr_accessor current_player: Integer
+attr_accessor log: Logger
+attr_accessor total_players: Integer
+attr_accessor total_points: Complex | Float | Integer | Rational
+attr_accessor game_start: Time
+attr_accessor game_finish: Integer
+def initialize: (log: Logger, players: Array[String]) -&gt; void
+def draw_card: -&gt; void
+def increment_player: -&gt; Integer
+def change_direction: -&gt; String
+def points: -&gt; (Integer)
+def winner: -&gt; Player</pre>
 
 <p>end</p>
 

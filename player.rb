@@ -51,10 +51,10 @@ class Player
 
   # determine if player has a card they can play
   def which_card(top_card)
-    @color_playable = color_playable(top_card)
+    @color_playable = find_color_playable(top_card)
     return @color_playable.last unless @color_playable.empty?
 
-    @like_playable = like_playable(top_card)
+    @like_playable = find_like_playable(top_card)
     return @like_playable.last unless @like_playable.empty? || (top_card.point_value == 50)
 
     wild_cards = @cards.find_all { |card| card.color == 4 }
@@ -65,14 +65,14 @@ class Player
   end
 
   # which of my cards match top card
-  def color_playable(top_card)
+  def find_color_playable(top_card)
     @log.info { "Color Playable: Top Card Color = #{COLORS[top_card.color]}" }
     @log.info { "Color Playable: #{self.to_s}" }
     @cards.find_all { |card| card.color == top_card.color }
   end
 
   # which of my cards match value of top card
-  def like_playable(top_card)
+  def find_like_playable(top_card)
     @cards.find_all { |card| card.internal_value == top_card.internal_value }
   end
 

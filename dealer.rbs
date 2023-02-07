@@ -1,0 +1,25 @@
+
+class Dealer
+  @winner: bool
+  @direction_name: String
+  @top_card: Card
+  @player: Player
+  @game_end: Time
+
+  attr_accessor deck: Deck
+  attr_accessor players: Array[Player]
+  attr_accessor direction: Integer
+  attr_accessor turn: Player
+  attr_accessor current_player: Integer
+  attr_accessor log: Logger
+  attr_accessor total_players: Integer
+  attr_accessor total_points: Complex | Float | Integer | Rational
+  attr_accessor game_start: Time
+  attr_accessor game_finish: Integer
+  def initialize: (log: Logger, players: Array[String]) -> void
+  def draw_card: -> void
+  def increment_player: -> Integer
+  def change_direction: -> String
+  def points: -> (Integer)
+  def winner: -> Player
+end
