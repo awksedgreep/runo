@@ -1,0 +1,14 @@
+# TypeProf 0.21.4
+
+# Classes
+class Card
+  attr_accessor color: Integer
+  attr_accessor internal_value: Integer
+  attr_accessor penalized: Integer
+  def initialize: (Integer internal_value, Integer color) -> void
+  def point_value: -> Integer
+  def face_value: -> Integer
+  def face_color: -> Integer
+  def sort_val: -> Integer
+  def to_s: -> String
+end

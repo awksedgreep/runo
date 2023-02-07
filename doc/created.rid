@@ -1,9 +1,11 @@
-Mon, 06 Feb 2023 21:34:21 -0500
-Gemfile	Tue, 31 Jan 2023 16:34:59 -0500
-Gemfile.lock	Tue, 31 Jan 2023 16:34:06 -0500
+Mon, 06 Feb 2023 22:11:03 -0500
+Gemfile	Mon, 06 Feb 2023 21:43:54 -0500
+Gemfile.lock	Mon, 06 Feb 2023 21:43:54 -0500
 README.rdoc	Wed, 27 Apr 2022 00:18:35 -0400
+Rakefile	Mon, 06 Feb 2023 22:10:51 -0500
 TODO.rdoc	Wed, 27 Apr 2022 00:18:35 -0400
 card.rb	Mon, 06 Feb 2023 19:04:21 -0500
+card.rbs	Mon, 06 Feb 2023 21:50:48 -0500
 dealer.rb	Mon, 06 Feb 2023 18:53:06 -0500
 deck.rb	Mon, 06 Feb 2023 18:38:27 -0500
 multirun.rb	Mon, 06 Feb 2023 19:06:02 -0500
