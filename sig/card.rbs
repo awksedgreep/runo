@@ -8,7 +8,7 @@ class Card
   def initialize: (Integer internal_value, Integer color) -> void
   def point_value: -> Integer
   def face_value: -> (Integer | String)
-  def face_color: -> Integer
+  def face_color: -> (Integer | String)
   def sort_val: -> Integer
   def to_s: -> String
 end
