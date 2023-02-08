@@ -5,6 +5,7 @@ require_relative 'player'
 require_relative 'deck'
 require_relative 'card'
 require 'logger'
+require 'pry'
 
 # to play
 # game = Dealer.new(log: log, players: ['Mark', 'Wesley', 'Josh', 'Mingjia'])
