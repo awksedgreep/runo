@@ -36,7 +36,7 @@ class Card
   end
 
   # returns a random number between 0 and 1000, used for shuffling
-  def sort_val
+  def sort_value
     rand(1000)
   end
 

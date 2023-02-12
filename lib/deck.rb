@@ -73,7 +73,7 @@ class Deck
 
   # shuffle the cards in the deck
   def shuffle
-    @cards = @cards.sort_by { |card| card.sort_val }
+    @cards = @cards.sort_by { |card| card.sort_value }
   end
 
   # iterate over the deck

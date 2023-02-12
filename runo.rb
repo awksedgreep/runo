@@ -4,7 +4,7 @@
 require 'logger'
 
 # Initialize logger
-log = Logger.new('runo.log', 3, 1_024_000 * 3)
+log = Logger.new('log/runo.log', 3, 1_024_000 * 3)
 log.level = Logger::WARN
 
 require './lib/dealer'
