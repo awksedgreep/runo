@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'colorize'
+
 ##
 # Card class represents a single card in the deck
 class Card
@@ -32,6 +34,11 @@ class Card
   # returns card color
   def face_color
     Runo::COLORS[color]
+  end
+
+  # string representation of card
+  def card_string
+    " #{face_color} #{face_value} "
   end
 
   # returns a random number between 0 and 1000, used for shuffling
