@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 # frozen_string_literal: true
 
 require_relative 'deck'
@@ -61,6 +60,7 @@ class Player
     wild_card = wild_cards.first unless wild_cards.empty?
     wild_card.color = preferred_color unless wild_card.nil?
     return wild_card unless wild_card.nil? # Seriously Rubocop? 'Might be unitialized' yeah you mean it might be nil?
+
     nil
   end
 
@@ -79,12 +79,9 @@ class Player
   # player just played a wild card and prefers color ?
   def preferred_color
     colors = {}
-    (0..4).each do |color|
-      colors[color] = 0
-    end
+    5.times { |color| colors[color] = 0 }
     @cards.collect { |card| colors[card.color] += card.point_value }
-    # nil out black, 'cause we don't want to pick it
-    colors.delete(4)
+    colors.delete(4) # nil out black, 'cause we don't want to pick it
     colors = colors.sort_by { |_, val| val }
     @log.info { "Player #{name} played wild card and prefers #{Runo::COLORS[colors.last[0]]}" }
     colors.last[0]

@@ -10,24 +10,24 @@
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: TreatCommentsAsGroupSeparators, ConsiderPunctuation, Include.
 # Include: **/*.gemfile, **/Gemfile, **/gems.rb
-Bundler/OrderedGems:
-  Exclude:
-    - 'Gemfile'
+#Bundler/OrderedGems:
+#  Exclude:
+#    - 'Gemfile'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
-Layout/EmptyLineAfterGuardClause:
-  Exclude:
-    - 'lib/player.rb'
+#Layout/EmptyLineAfterGuardClause:
+#  Exclude:
+#    - 'lib/player.rb'
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
-Lint/ScriptPermission:
-  Exclude:
-    - 'lib/card.rb'
-    - 'lib/dealer.rb'
-    - 'lib/deck.rb'
-    - 'lib/player.rb'
+#Lint/ScriptPermission:
+#  Exclude:
+#    - 'lib/card.rb'
+#    - 'lib/dealer.rb'
+#    - 'lib/deck.rb'
+#    - 'lib/player.rb'
 
 # Offense count: 2
 # Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes.
@@ -57,42 +57,42 @@ Metrics/MethodLength:
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
-Style/BlockComments:
-  Exclude:
-    - 'spec/spec_helper.rb'
+#Style/BlockComments:
+#  Exclude:
+#    - 'spec/spec_helper.rb'
 
 # Offense count: 2
-Style/CombinableLoops:
-  Exclude:
-    - 'lib/deck.rb'
+#Style/CombinableLoops:
+#  Exclude:
+#    - 'lib/deck.rb'
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
-Style/EachForSimpleLoop:
-  Exclude:
-    - 'lib/deck.rb'
-    - 'lib/player.rb'
+#Style/EachForSimpleLoop:
+#  Exclude:
+#    - 'lib/deck.rb'
+#    - 'lib/player.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
-Style/ExplicitBlockArgument:
-  Exclude:
-    - 'lib/deck.rb'
+#Style/ExplicitBlockArgument:
+#  Exclude:
+#    - 'lib/deck.rb'
 
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: always, always_true, never
-Style/FrozenStringLiteralComment:
-  Exclude:
-    - 'spec/spec_helper.rb'
+#Style/FrozenStringLiteralComment:
+#  Exclude:
+#    - 'spec/spec_helper.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MinBodyLength, AllowConsecutiveConditionals.
-Style/GuardClause:
-  Exclude:
-    - 'lib/deck.rb'
+#Style/GuardClause:
+#  Exclude:
+#    - 'lib/deck.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -107,14 +107,14 @@ Style/HashSyntax:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
 # SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Exclude:
-    - 'bin/rspec'
+# Style/StringLiterals:
+#  Exclude:
+#    - 'bin/rspec'
 
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowMethodsWithArguments, AllowedMethods, AllowedPatterns, AllowComments.
 # AllowedMethods: define_method
-Style/SymbolProc:
-  Exclude:
-    - 'lib/deck.rb'
+#Style/SymbolProc:
+#  Exclude:
+#    - 'lib/deck.rb'

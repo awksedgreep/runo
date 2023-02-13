@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'logger'
-gem 'rubocop'
-gem 'typeprof'
 gem 'pry'
 gem 'rspec'
+gem 'rubocop'
+gem 'typeprof'

@@ -18,3 +18,13 @@ task :test do
   puts 'Running rspec tests . . . '
   sh 'bin/rspec'
 end
+
+desc 'Generate rubocop config'
+task :rubocop do
+  sh 'rubocop --auto-gen-config'
+end
+
+desc 'Console'
+task :console do
+  sh 'irb -r "./runo"'
+end
