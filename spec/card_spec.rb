@@ -64,19 +64,19 @@ describe 'Card' do
       expect(card.face_color).to eq('Red')
     end
     it 'should be a red Draw 2' do
-      expect(card.internal_value).to eq 14
-      expect(card.face_value).to eq 'Draw 4'
+      expect(card.internal_value).to eq 12
+      expect(card.face_value).to eq 'Draw 2'
     end
-    it 'should have a point value of 50' do
-      expect(card.point_value).to eq 50
+    it 'should have a point value of 20' do
+      expect(card.point_value).to eq 20
     end
     it 'should return a sort value of 1-1000 of type int' do
       expect(card.sort_value).to be > 0
       expect(card.sort_value).to be < 1001
       expect(card.sort_value).to be_an Integer
     end
-    it 'should be a black draw 4 when asked' do
-      expect(card.to_s).to eq ' Black Draw 4 '
+    it 'should be a red draw 2 when asked' do
+      expect(card.to_s).to eq ' Red Draw 2 '
     end
     it 'should not be a penalized card' do
       expect(card.penalized).to be_falsy

@@ -32,7 +32,8 @@ class Deck
   attr_accessor :cards
 
   # Creates a deck or decks and shuffles it/them
-  def initialize(number_of_decks = 1)
+  def initialize(log, number_of_decks = 1)
+    @log = log
     @cards = []
     create_deck(number_of_decks)
   end
@@ -61,14 +62,12 @@ class Deck
 
   # draw a single card from the deck
   def draw_card
-    if @cards.length > 3
-      @cards.shift
-    else
-      # Deck nearly empty, shuffle in new one
+    if @cards.length < 3
+      @log.info { 'Deck nearly empty, shuffle in new deck' }
       create_deck(1)
       shuffle
-      @cards.shift
     end
+    @cards.shift
   end
 
   # shuffle the cards in the deck
