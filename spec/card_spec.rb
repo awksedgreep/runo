@@ -24,7 +24,7 @@ describe 'Card' do
       expect(card.sort_value).to be_an Integer
     end
     it 'should be a black wild when asked' do
-      expect(card.to_s).to eq ' Black Wild '
+      expect(card.card_string).to eq ' Black Wild '
     end
     it 'should not be a penalized card' do
       expect(card.penalized).to be_falsy
@@ -50,7 +50,7 @@ describe 'Card' do
       expect(card.sort_value).to be_an Integer
     end
     it 'should be a black draw 4 when asked' do
-      expect(card.to_s).to eq ' Black Draw 4 '
+      expect(card.card_string).to eq ' Black Draw 4 '
     end
     it 'should not be a penalized card' do
       expect(card.penalized).to be_falsy
@@ -76,7 +76,7 @@ describe 'Card' do
       expect(card.sort_value).to be_an Integer
     end
     it 'should be a red draw 2 when asked' do
-      expect(card.to_s).to eq ' Red Draw 2 '
+      expect(card.card_string).to eq ' Red Draw 2 '
     end
     it 'should not be a penalized card' do
       expect(card.penalized).to be_falsy
