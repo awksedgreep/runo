@@ -3,7 +3,7 @@
 desc 'Remove logs'
 task :rm_logs do
   puts 'Removing logs'
-  files = Dir['*.log*']
+  files = Dir['log/*.log*']
   rm(files, verbose: true) unless files.empty?
 end
 
@@ -19,9 +19,9 @@ task :test do
   sh 'bin/rspec'
 end
 
-desc 'Generate rubocop config'
+desc 'Run rubocop'
 task :rubocop do
-  sh 'rubocop --auto-gen-config'
+  sh 'rubocop'
 end
 
 desc 'Console'
