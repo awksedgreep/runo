@@ -41,6 +41,6 @@ class Card
 
   # returns a string representation of the card
   def to_s
-    " #{face_color}" << ' ' << "#{face_value} "
+    " #{face_color} #{face_value} ".send(face_color.downcase)
   end
 end
