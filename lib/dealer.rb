@@ -59,6 +59,7 @@ class Dealer
 
   # Create the card deck and shuffle it
   def create_deck(card_decks)
+    card_decks = 1 if card_decks < 1
     @deck = Deck.new(@log, card_decks)
     @log.info { "Shuffling Deck: #{@deck.length} cards" }
     @deck.shuffle
