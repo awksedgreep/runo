@@ -82,4 +82,108 @@ describe 'Card' do
       expect(card.penalized).to be_falsy
     end
   end
+  # Skip Rspec
+  context 'the card should be a blue skip' do
+    let(:card) { Card.new(11, Runo::BLUE) }
+    it 'should be blue' do
+      expect(card.color).to eq(Runo::BLUE)
+      expect(card.face_color).to eq('Blue')
+    end
+    it 'should be a blue skip' do
+      expect(card.internal_value).to eq 11
+      expect(card.face_value).to eq 'Skip'
+    end
+    it 'should have a point value of 20' do
+      expect(card.point_value).to eq 20
+    end
+    it 'should return a sort value of 1-1000 of type int' do
+      expect(card.sort_value).to be > 0
+      expect(card.sort_value).to be < 1001
+      expect(card.sort_value).to be_an Integer
+    end
+    it 'should be a blue skip when asked' do
+      expect(card.card_string).to eq ' Blue Skip '
+    end
+    it 'should not be a penalized card' do
+      expect(card.penalized).to be_falsy
+    end
+  end
+  # Green Reverse Rspec
+  context 'the card should be a green reverse' do
+    let(:card) { Card.new(10, Runo::GREEN) }
+    it 'should be Green' do
+      expect(card.color).to eq(Runo::GREEN)
+      expect(card.face_color).to eq('Green')
+    end
+    it 'should be a green reverse' do
+      expect(card.internal_value).to eq 10
+      expect(card.face_value).to eq 'Reverse'
+    end
+    it 'should have a point value of 20' do
+      expect(card.point_value).to eq 20
+    end
+    it 'should return a sort value of 1-1000 of type int' do
+      expect(card.sort_value).to be > 0
+      expect(card.sort_value).to be < 1001
+      expect(card.sort_value).to be_an Integer
+    end
+    it 'should be a green reverse when asked' do
+      expect(card.card_string).to eq ' Green Reverse '
+    end
+    it 'should not be a penalized card' do
+      expect(card.penalized).to be_falsy
+    end
+  end
+   # Green Reverse Rspec
+  context 'the card should be a green reverse' do
+    let(:card) { Card.new(10, Runo::GREEN) }
+    it 'should be Green' do
+      expect(card.color).to eq(Runo::GREEN)
+      expect(card.face_color).to eq('Green')
+    end
+    it 'should be a green reverse' do
+      expect(card.internal_value).to eq 10
+      expect(card.face_value).to eq 'Reverse'
+    end
+    it 'should have a point value of 20' do
+      expect(card.point_value).to eq 20
+    end
+    it 'should return a sort value of 1-1000 of type int' do
+      expect(card.sort_value).to be > 0
+      expect(card.sort_value).to be < 1001
+      expect(card.sort_value).to be_an Integer
+    end
+    it 'should be a green reverse when asked' do
+      expect(card.card_string).to eq ' Green Reverse '
+    end
+    it 'should not be a penalized card' do
+      expect(card.penalized).to be_falsy
+    end
+  end
+  # Yellow 5 Rspec
+  context 'the card should be a yellow 5' do
+    let(:card) { Card.new(5, Runo::YELLOW) }
+    it 'should be Yellow' do
+      expect(card.color).to eq(Runo::YELLOW)
+      expect(card.face_color).to eq('Yellow')
+    end
+    it 'should be a yellow 5' do
+      expect(card.internal_value).to eq 5
+      expect(card.face_value).to eq 5
+    end
+    it 'should have a point value of 5' do
+      expect(card.point_value).to eq 5
+    end
+    it 'should return a sort value of 1-1000 of type int' do
+      expect(card.sort_value).to be > 0
+      expect(card.sort_value).to be < 1001
+      expect(card.sort_value).to be_an Integer
+    end
+    it 'should be a green reverse when asked' do
+      expect(card.card_string).to eq ' Yellow 5 '
+    end
+    it 'should not be a penalized card' do
+      expect(card.penalized).to be_falsy
+    end
+  end
 end
