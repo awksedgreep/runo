@@ -13,6 +13,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     rainbow (3.1.1)
+    rake (13.0.6)
     rbs (2.8.4)
     regexp_parser (2.3.1)
     rexml (3.2.5)
@@ -51,6 +52,7 @@ PLATFORMS
 DEPENDENCIES
   logger
   pry
+  rake
   rspec
   rubocop
   typeprof
