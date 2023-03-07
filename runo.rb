@@ -32,4 +32,4 @@ end
 
 multi_end = Time.now
 
-runo.log.warn { "All #{ARGV[0]} games took #{multi_end - multi_start} seconds" }
+runo&.log&.warn { "All #{ARGV[0]} games took #{multi_end - multi_start} seconds" }
