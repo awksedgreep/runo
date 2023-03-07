@@ -6,9 +6,9 @@ require_relative '../lib/deck'
 describe 'Card' do
   # Wild Card rspec
   context 'the card should be wild' do
-    let(:card) { Card.new(13, Runo::BLACK) }
+    let(:card) { Card.new(13, RunoCards::BLACK) }
     it 'should be black' do
-      expect(card.color).to eq(Runo::BLACK)
+      expect(card.color).to eq(RunoCards::BLACK)
       expect(card.face_color).to eq('Black')
     end
     it 'should be a wild card' do
@@ -32,9 +32,9 @@ describe 'Card' do
   end
   # Draw 4 Rspec
   context 'the card should be a Draw 4' do
-    let(:card) { Card.new(14, Runo::BLACK) }
+    let(:card) { Card.new(14, RunoCards::BLACK) }
     it 'should be black' do
-      expect(card.color).to eq(Runo::BLACK)
+      expect(card.color).to eq(RunoCards::BLACK)
       expect(card.face_color).to eq('Black')
     end
     it 'should be a Draw 4' do
@@ -58,9 +58,9 @@ describe 'Card' do
   end
   # Draw 2 Rspec
   context 'the card should be a red Draw 2' do
-    let(:card) { Card.new(12, Runo::RED) }
+    let(:card) { Card.new(12, RunoCards::RED) }
     it 'should be red' do
-      expect(card.color).to eq(Runo::RED)
+      expect(card.color).to eq(RunoCards::RED)
       expect(card.face_color).to eq('Red')
     end
     it 'should be a red Draw 2' do
@@ -84,9 +84,9 @@ describe 'Card' do
   end
   # Skip Rspec
   context 'the card should be a blue skip' do
-    let(:card) { Card.new(11, Runo::BLUE) }
+    let(:card) { Card.new(11, RunoCards::BLUE) }
     it 'should be blue' do
-      expect(card.color).to eq(Runo::BLUE)
+      expect(card.color).to eq(RunoCards::BLUE)
       expect(card.face_color).to eq('Blue')
     end
     it 'should be a blue skip' do
@@ -110,9 +110,9 @@ describe 'Card' do
   end
   # Green Reverse Rspec
   context 'the card should be a green reverse' do
-    let(:card) { Card.new(10, Runo::GREEN) }
+    let(:card) { Card.new(10, RunoCards::GREEN) }
     it 'should be Green' do
-      expect(card.color).to eq(Runo::GREEN)
+      expect(card.color).to eq(RunoCards::GREEN)
       expect(card.face_color).to eq('Green')
     end
     it 'should be a green reverse' do
@@ -136,9 +136,9 @@ describe 'Card' do
   end
    # Green Reverse Rspec
   context 'the card should be a green reverse' do
-    let(:card) { Card.new(10, Runo::GREEN) }
+    let(:card) { Card.new(10, RunoCards::GREEN) }
     it 'should be Green' do
-      expect(card.color).to eq(Runo::GREEN)
+      expect(card.color).to eq(RunoCards::GREEN)
       expect(card.face_color).to eq('Green')
     end
     it 'should be a green reverse' do
@@ -162,9 +162,9 @@ describe 'Card' do
   end
   # Yellow 5 Rspec
   context 'the card should be a yellow 5' do
-    let(:card) { Card.new(5, Runo::YELLOW) }
+    let(:card) { Card.new(5, RunoCards::YELLOW) }
     it 'should be Yellow' do
-      expect(card.color).to eq(Runo::YELLOW)
+      expect(card.color).to eq(RunoCards::YELLOW)
       expect(card.face_color).to eq('Yellow')
     end
     it 'should be a yellow 5' do
