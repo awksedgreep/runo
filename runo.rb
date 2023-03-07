@@ -2,32 +2,34 @@
 # frozen_string_literal: true
 
 require 'logger'
-
-# Initialize logger
-log = Logger.new('log/runo.log', 3, 1_024_000 * 3)
-log.level = Logger::WARN
-log.level = Logger::INFO
-
-require './lib/dealer'
+require_relative './lib/dealer'
 
 # Class for running a single game
-class TestRun
+class Runo
   # store the game object in this
   attr_accessor :game
 
+  # store the logger object in this
+  attr_accessor :log
+
   # start a test
-  def initialize(log:)
+  def initialize(log: Logger.new('log/runo.log', 3, 1_024_000 * 3),
+                 players: %w[Mark Wesley Josh Kim Nick])
     @log = log
-    @game = Dealer.new(log: @log, players: %w[Mark Wesley Josh Kim Nick])
+    @log.level = Logger::INFO
+    @players = players
+    @game = Dealer.new(log: @log, players: @players)
   end
 end
 
 multi_start = Time.now
 
-1.upto(ARGV[0].to_i) do
-  TestRun.new(log:)
+runo = nil
+
+ARGV[0].to_i.times do
+  runo = Runo.new
 end
 
 multi_end = Time.now
 
-log.warn { "All #{ARGV[0]} games took #{multi_end - multi_start} seconds" }
+runo.log.warn { "All #{ARGV[0]} games took #{multi_end - multi_start} seconds" }

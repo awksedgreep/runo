@@ -67,7 +67,7 @@ class Player
 
   # which of my cards match top card
   def find_color_playable(top_card)
-    @log.info { "Color Playable: Top Card Color = #{Runo::COLORS[top_card.color]}" }
+    @log.info { "Color Playable: Top Card Color = #{RunoCards::COLORS[top_card.color]}" }
     @log.info { "Color Playable: #{self}" }
     @cards.find_all { |card| card.color == top_card.color }
   end
@@ -84,7 +84,7 @@ class Player
     @cards.collect { |card| colors[card.color] += card.point_value }
     colors.delete(4) # nil out black, 'cause we don't want to pick it
     colors = colors.sort_by { |_, val| val }
-    @log.info { "Player #{name} played wild card and prefers #{Runo::COLORS[colors.last[0]]}" }
+    @log.info { "Player #{name} played wild card and prefers #{RunoCards::COLORS[colors.last[0]]}" }
     colors.last[0]
   end
 

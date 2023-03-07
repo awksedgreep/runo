@@ -28,12 +28,12 @@ class Card
 
   # returns internal value of card
   def face_value
-    Runo::CARDS[internal_value]
+    RunoCards::CARDS[internal_value]
   end
 
   # returns card color
   def face_color
-    Runo::COLORS[color]
+    RunoCards::COLORS[color]
   end
 
   # string representation of card

@@ -2,7 +2,7 @@
 
 require_relative 'card'
 
-module Runo
+module RunoCards
   # face values for internal value
   CARDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'Reverse', 'Skip', 'Draw 2', 'Wild', 'Draw 4'].freeze
 
@@ -49,8 +49,8 @@ class Deck
         # One of each 0 in each color
         @cards << Card.new(0, color)
         # Four Wilds, no color/black
-        @cards << Card.new(13, Runo::BLACK)
-        @cards << Card.new(14, Runo::BLACK)
+        @cards << Card.new(13, RunoCards::BLACK)
+        @cards << Card.new(14, RunoCards::BLACK)
       end
     end
   end
