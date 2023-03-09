@@ -66,12 +66,15 @@
     <li><a href="./README_rdoc.html">README</a>
     <li><a href="./Rakefile.html">Rakefile</a>
     <li><a href="./TODO_rdoc.html">TODO</a>
-    <li><a href="./card_rbs.html">card.rbs</a>
-    <li><a href="./dealer_rbs.html">dealer.rbs</a>
-    <li><a href="./deck_rbs.html">deck.rbs</a>
-    <li><a href="./multirun_rbs.html">multirun.rbs</a>
-    <li><a href="./player_rbs.html">player.rbs</a>
-    <li><a href="./sig/player_rbs.html">player.rbs</a>
+    <li><details><summary>sig</summary>
+    <ul class="link-list">
+      <li><a href="./sig/card_rbs.html">card.rbs</a>
+      <li><a href="./sig/dealer_rbs.html">dealer.rbs</a>
+      <li><a href="./sig/deck_rbs.html">deck.rbs</a>
+      <li><a href="./sig/multirun_rbs.html">multirun.rbs</a>
+      <li><a href="./sig/player_rbs.html">player.rbs</a>
+      <li><a href="./sig/runo_rbs.html">runo.rbs</a>
+    </ul></details>
   </ul>
 </div>
 
@@ -85,7 +88,7 @@
 <p>desc ‘Remove logs’ task :rm_logs do</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Removing logs&#39;</span>
-<span class="ruby-identifier">files</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-string">&#39;*.log*&#39;</span>]
+<span class="ruby-identifier">files</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-string">&#39;log/*.log*&#39;</span>]
 <span class="ruby-identifier">rm</span>(<span class="ruby-identifier">files</span>, <span class="ruby-value">verbose:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">files</span>.<span class="ruby-identifier">empty?</span>
 </pre>
 
@@ -95,6 +98,28 @@
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Making rdocs&#39;</span>
 <span class="ruby-identifier">sh</span> <span class="ruby-string">&#39;rdoc&#39;</span>
+</pre>
+
+<p>end</p>
+
+<p>desc ‘Run tests’ task :test do</p>
+
+<pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Running rspec tests . . . &#39;</span>
+<span class="ruby-identifier">sh</span> <span class="ruby-string">&#39;bin/rspec&#39;</span>
+</pre>
+
+<p>end</p>
+
+<p>desc ‘Run rubocop’ task :rubocop do</p>
+
+<pre class="ruby"><span class="ruby-identifier">sh</span> <span class="ruby-string">&#39;rubocop&#39;</span>
+</pre>
+
+<p>end</p>
+
+<p>desc ‘Console’ task :console do</p>
+
+<pre class="ruby"><span class="ruby-identifier">sh</span> <span class="ruby-string">&#39;irb -r &quot;./runo&quot;&#39;</span>
 </pre>
 
 <p>end</p>

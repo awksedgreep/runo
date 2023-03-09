@@ -61,7 +61,7 @@
 <div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  <p class="link"><a href="Object.html">Object</a>
+  <p class="link">Object
 </div>
 
     
@@ -73,10 +73,25 @@
 
   <ul class="link-list" role="directory">
     <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-after_turn">#after_turn</a>
+    <li ><a href="#method-i-before_turn">#before_turn</a>
     <li ><a href="#method-i-change_direction">#change_direction</a>
+    <li ><a href="#method-i-create_deck">#create_deck</a>
+    <li ><a href="#method-i-create_players">#create_players</a>
+    <li ><a href="#method-i-deal_cards">#deal_cards</a>
     <li ><a href="#method-i-draw_card">#draw_card</a>
+    <li ><a href="#method-i-draw_four">#draw_four</a>
+    <li ><a href="#method-i-draw_two">#draw_two</a>
+    <li ><a href="#method-i-game_init">#game_init</a>
     <li ><a href="#method-i-increment_player">#increment_player</a>
+    <li ><a href="#method-i-initial_card_rules">#initial_card_rules</a>
+    <li ><a href="#method-i-log_after_turn">#log_after_turn</a>
+    <li ><a href="#method-i-log_before_turn">#log_before_turn</a>
+    <li ><a href="#method-i-play_game">#play_game</a>
     <li ><a href="#method-i-points">#points</a>
+    <li ><a href="#method-i-reverse">#reverse</a>
+    <li ><a href="#method-i-set_defaults">#set_defaults</a>
+    <li ><a href="#method-i-skip">#skip</a>
     <li ><a href="#method-i-winner">#winner</a>
   </ul>
 </div>
@@ -225,85 +240,10 @@
           <p>Create dealer, deck, add players</p>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 34</span>
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">log:</span>, <span class="ruby-value">players:</span>)
-  <span class="ruby-ivar">@game_start</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
-  <span class="ruby-ivar">@winner</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-ivar">@deck</span> = <span class="ruby-constant">Deck</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">players</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">/</span> <span class="ruby-value">8</span>)
-  <span class="ruby-ivar">@deck</span>.<span class="ruby-identifier">shuffle</span>
-  <span class="ruby-ivar">@direction</span> = <span class="ruby-value">1</span> <span class="ruby-comment"># start with forward direction</span>
-  <span class="ruby-ivar">@direction_name</span> = <span class="ruby-string">&#39;Forward&#39;</span>
-  <span class="ruby-ivar">@log</span> = <span class="ruby-identifier">log</span>
-  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Shuffling Deck: #{@deck.length} cards&quot;</span> }
-  <span class="ruby-ivar">@players</span> = []
-  <span class="ruby-identifier">players</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">player</span><span class="ruby-operator">|</span>
-    <span class="ruby-ivar">@players</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Player</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">log:</span> <span class="ruby-ivar">@log</span>, <span class="ruby-value">name:</span> <span class="ruby-identifier">player</span>, <span class="ruby-value">dealer:</span> <span class="ruby-keyword">self</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&#39;Dealing Cards&#39;</span> }
-  <span class="ruby-value">7</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
-    <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:draw_card</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@top_card</span> = <span class="ruby-ivar">@deck</span>.<span class="ruby-identifier">draw_card</span>
-  <span class="ruby-ivar">@total_players</span> = <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">length</span>
-  <span class="ruby-ivar">@current_player</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@player</span> = <span class="ruby-ivar">@players</span>[<span class="ruby-ivar">@current_player</span>]
-  <span class="ruby-comment"># if reverse or skip handle first card</span>
-  <span class="ruby-identifier">change_direction</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">internal_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">10</span> <span class="ruby-comment"># 10 = Reverse</span>
-  <span class="ruby-identifier">increment_player</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">internal_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">11</span> <span class="ruby-comment"># 11 = Skip</span>
-  <span class="ruby-comment"># if wild card have first player pick color</span>
-  <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">color</span> = <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">preferred_color</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span>
-  <span class="ruby-keyword">until</span> <span class="ruby-ivar">@winner</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span>.<span class="ruby-identifier">nil?</span>
-      <span class="ruby-keyword">case</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">internal_value</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-value">14</span> <span class="ruby-comment"># Draw Four</span>
-        <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Player #{@player.name} drawing 4 cards&quot;</span> }
-        <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">draw_card</span>(<span class="ruby-value">4</span>)
-        <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span> = <span class="ruby-keyword">true</span>
-        <span class="ruby-identifier">increment_player</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-value">12</span> <span class="ruby-comment"># Draw Two</span>
-        <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Player #{@player.name} drawing 2 cards&quot;</span> }
-        <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">draw_card</span>(<span class="ruby-value">2</span>)
-        <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span> = <span class="ruby-keyword">true</span>
-        <span class="ruby-identifier">increment_player</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-string">&#39;nothing&#39;</span> <span class="ruby-comment"># Rubocop is dumb</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;It&#39;s #{@player.name}&#39;s Turn: Direction =  #{@direction_name}&quot;</span> }
-    <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Before turn: #{@player}&quot;</span> }
-    <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Top card #{@top_card}&quot;</span> }
-    <span class="ruby-identifier">lay_down</span> = <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">play_card</span>(<span class="ruby-ivar">@top_card</span>)
-    <span class="ruby-ivar">@top_card</span> = <span class="ruby-identifier">lay_down</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">lay_down</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">lay_down</span>.<span class="ruby-identifier">nil?</span>
-      <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Player #{@player.name} could not lay down&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lay_down</span>.<span class="ruby-identifier">nil?</span> }
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Player #{@player.name} played #{lay_down}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">lay_down</span>.<span class="ruby-identifier">nil?</span> }
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Player #{@player.name} now has #{@player.cards.length} cards&quot;</span> }
-    <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;After turn: #{@player}&quot;</span> }
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">cards</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">zero?</span>
-      <span class="ruby-identifier">winner</span>
-      <span class="ruby-keyword">break</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@deck</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">3</span>
-      <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&#39;Reshuffling deck&#39;</span> }
-      <span class="ruby-ivar">@deck</span> = <span class="ruby-constant">Deck</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@players</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">/</span> <span class="ruby-value">8</span>)
-      <span class="ruby-ivar">@deck</span>.<span class="ruby-identifier">shuffle</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span>.<span class="ruby-identifier">nil?</span>
-      <span class="ruby-keyword">case</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">internal_value</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-value">10</span> <span class="ruby-comment"># Reverse</span>
-        <span class="ruby-identifier">change_direction</span>
-        <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span> = <span class="ruby-keyword">true</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-value">11</span> <span class="ruby-comment"># Skip</span>
-        <span class="ruby-identifier">increment_player</span>
-        <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span> = <span class="ruby-keyword">true</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-string">&#39;nothing&#39;</span> <span class="ruby-comment"># Rubocop is dumb</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">increment_player</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">game_init</span>(<span class="ruby-identifier">log</span>, <span class="ruby-identifier">players</span>)
+  <span class="ruby-identifier">play_game</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -318,6 +258,60 @@
          <h3>Public Instance Methods</h3>
        </header>
 
+      <div id="method-i-after_turn" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">after_turn</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>After lay down complete, we need to see if special cards need to be addressed</p>
+
+          <div class="method-source-code" id="after_turn-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">after_turn</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">reverse</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">internal_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">10</span> <span class="ruby-comment"># Reverse</span>
+    <span class="ruby-identifier">skip</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">internal_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">11</span> <span class="ruby-comment"># Skip</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">increment_player</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-before_turn" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">before_turn</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>before we start our turn, do we need to handle any special cards</p>
+
+          <div class="method-source-code" id="before_turn-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">before_turn</span>
+  <span class="ruby-identifier">log_before_turn</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">draw_four</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">internal_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">14</span> <span class="ruby-comment"># Draw Four</span>
+  <span class="ruby-identifier">draw_two</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">internal_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">12</span> <span class="ruby-comment"># Draw Two</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
       <div id="method-i-change_direction" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
@@ -331,7 +325,7 @@
           <p>reverse direction</p>
 
           <div class="method-source-code" id="change_direction-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 129</span>
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">change_direction</span>
   <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&#39;Reversing Direction&#39;</span> }
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@direction</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
@@ -340,6 +334,84 @@
   <span class="ruby-keyword">else</span>
     <span class="ruby-ivar">@direction</span> = <span class="ruby-value">1</span>
     <span class="ruby-ivar">@direction_name</span> = <span class="ruby-string">&#39;Forward&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-create_deck" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">create_deck</span><span
+              class="method-args">(card_decks)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Create the card deck and shuffle it</p>
+
+          <div class="method-source-code" id="create_deck-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_deck</span>(<span class="ruby-identifier">card_decks</span>)
+  <span class="ruby-identifier">card_decks</span> = <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">card_decks</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
+  <span class="ruby-ivar">@deck</span> = <span class="ruby-constant">Deck</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@log</span>, <span class="ruby-identifier">card_decks</span>)
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Shuffling Deck: #{@deck.length} cards&quot;</span> }
+  <span class="ruby-ivar">@deck</span>.<span class="ruby-identifier">shuffle</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-create_players" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">create_players</span><span
+              class="method-args">(players)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Create the player objects</p>
+
+          <div class="method-source-code" id="create_players-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_players</span>(<span class="ruby-identifier">players</span>)
+  <span class="ruby-ivar">@players</span> = []
+  <span class="ruby-identifier">players</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">player</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@players</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Player</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">log:</span> <span class="ruby-ivar">@log</span>, <span class="ruby-value">name:</span> <span class="ruby-identifier">player</span>, <span class="ruby-value">dealer:</span> <span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-deal_cards" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">deal_cards</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Deal cards to the players</p>
+
+          <div class="method-source-code" id="deal_cards-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deal_cards</span>
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&#39;Dealing Cards&#39;</span> }
+  <span class="ruby-value">7</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:draw_card</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -361,9 +433,91 @@
           <p>draw one card from the deck and return it</p>
 
           <div class="method-source-code" id="draw_card-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 115</span>
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">draw_card</span>
   <span class="ruby-ivar">@deck</span>.<span class="ruby-identifier">draw_card</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-draw_four" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">draw_four</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Draw four has been played</p>
+
+          <div class="method-source-code" id="draw_four-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">draw_four</span>
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Player #{@player.name} drawing 4 cards&quot;</span> }
+  <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">draw_card</span>(<span class="ruby-value">4</span>)
+  <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">increment_player</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-draw_two" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">draw_two</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Draw two has been played</p>
+
+          <div class="method-source-code" id="draw_two-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">draw_two</span>
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Player #{@player.name} drawing 2 cards&quot;</span> }
+  <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">draw_card</span>(<span class="ruby-value">2</span>)
+  <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">increment_player</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-game_init" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">game_init</span><span
+              class="method-args">(log, players)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Create a game, deck, shuffle, and deal cards</p>
+
+          <div class="method-source-code" id="game_init-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">game_init</span>(<span class="ruby-identifier">log</span>, <span class="ruby-identifier">players</span>)
+  <span class="ruby-ivar">@log</span> = <span class="ruby-identifier">log</span>
+  <span class="ruby-identifier">create_deck</span>(<span class="ruby-identifier">players</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">/</span> <span class="ruby-value">8</span>)
+  <span class="ruby-identifier">create_players</span>(<span class="ruby-identifier">players</span>)
+  <span class="ruby-identifier">deal_cards</span>
+  <span class="ruby-identifier">set_defaults</span>
+  <span class="ruby-ivar">@top_card</span> = <span class="ruby-ivar">@deck</span>.<span class="ruby-identifier">draw_card</span>
+  <span class="ruby-ivar">@current_player</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@player</span> = <span class="ruby-ivar">@players</span>[<span class="ruby-ivar">@current_player</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -384,13 +538,123 @@
           <p>next player in the current direction</p>
 
           <div class="method-source-code" id="increment_player-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 120</span>
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">increment_player</span>
   <span class="ruby-ivar">@current_player</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@direction</span>
   <span class="ruby-ivar">@current_player</span> = (<span class="ruby-ivar">@total_players</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_player</span>.<span class="ruby-identifier">negative?</span>
   <span class="ruby-ivar">@current_player</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_player</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@total_players</span>
   <span class="ruby-ivar">@player</span> = <span class="ruby-ivar">@players</span>[<span class="ruby-ivar">@current_player</span>]
   <span class="ruby-ivar">@current_player</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-initial_card_rules" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">initial_card_rules</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Published rules for what to do if top card is reverse, skip, wild, etc</p>
+
+          <div class="method-source-code" id="initial_card_rules-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initial_card_rules</span>
+  <span class="ruby-comment"># if reverse or skip handle first card</span>
+  <span class="ruby-identifier">change_direction</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">internal_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">10</span> <span class="ruby-comment"># 10 = Reverse</span>
+  <span class="ruby-identifier">increment_player</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">internal_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">11</span> <span class="ruby-comment"># 11 = Skip</span>
+  <span class="ruby-comment"># if wild card have first player pick color</span>
+  <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">color</span> = <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">preferred_color</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-log_after_turn" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">log_after_turn</span><span
+              class="method-args">(lay_down)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Log status after player’s turn</p>
+
+          <div class="method-source-code" id="log_after_turn-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">log_after_turn</span>(<span class="ruby-identifier">lay_down</span>)
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Player #{@player.name} could not lay down&quot;</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">lay_down</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Player #{@player.name} played #{lay_down}&quot;</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">lay_down</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Player #{@player.name} now has #{@player.cards.length} cards&quot;</span> }
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;After turn: #{@player}&quot;</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-log_before_turn" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">log_before_turn</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Log some initial pre turn data</p>
+
+          <div class="method-source-code" id="log_before_turn-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">log_before_turn</span>
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;It&#39;s #{@player.name}&#39;s Turn: Direction =  #{@direction_name}&quot;</span> }
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Before turn: #{@player}&quot;</span> }
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-node">&quot;Top card #{@top_card}&quot;</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-play_game" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">play_game</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Play one game of uno</p>
+
+          <div class="method-source-code" id="play_game-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">play_game</span>
+  <span class="ruby-identifier">initial_card_rules</span>
+  <span class="ruby-keyword">until</span> <span class="ruby-ivar">@winner</span>
+    <span class="ruby-identifier">before_turn</span>
+    <span class="ruby-identifier">lay_down</span> = <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">play_card</span>(<span class="ruby-ivar">@top_card</span>)
+    <span class="ruby-ivar">@top_card</span> = <span class="ruby-identifier">lay_down</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">lay_down</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">log_after_turn</span>(<span class="ruby-identifier">lay_down</span>)
+    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">winner</span>
+
+    <span class="ruby-identifier">after_turn</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -411,11 +675,88 @@
           <p>points in the remaining players hands</p>
 
           <div class="method-source-code" id="points-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 141</span>
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">points</span>
   <span class="ruby-ivar">@total_points</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">player</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@total_points</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">player</span>.<span class="ruby-identifier">points</span> }
   <span class="ruby-ivar">@total_points</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-reverse" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">reverse</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Reverse has been played</p>
+
+          <div class="method-source-code" id="reverse-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse</span>
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&#39;Reverse played, inverting direction&#39;</span> }
+  <span class="ruby-identifier">change_direction</span>
+  <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-set_defaults" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">set_defaults</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Set some instance defaults for one game</p>
+
+          <div class="method-source-code" id="set_defaults-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_defaults</span>
+  <span class="ruby-ivar">@game_start</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-ivar">@winner</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@direction</span> = <span class="ruby-value">1</span> <span class="ruby-comment"># start with forward direction</span>
+  <span class="ruby-ivar">@direction_name</span> = <span class="ruby-string">&#39;Forward&#39;</span>
+  <span class="ruby-ivar">@total_players</span> = <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">length</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-skip" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">skip</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Skip card has been played</p>
+
+          <div class="method-source-code" id="skip-source">
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip</span>
+  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">info</span> { <span class="ruby-string">&#39;Skip played, skipping one player&#39;</span> }
+  <span class="ruby-identifier">increment_player</span>
+  <span class="ruby-ivar">@top_card</span>.<span class="ruby-identifier">penalized</span> = <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -436,8 +777,10 @@
           <p>return winner of the game</p>
 
           <div class="method-source-code" id="winner-source">
-            <pre><span class="ruby-comment"># File dealer.rb, line 148</span>
+            <pre><span class="ruby-comment"># File lib/dealer.rb, line 205</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">winner</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">cards</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
+
   <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-node">&quot;Player #{@player.name} Won!&quot;</span> }
   <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">player</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-node">&quot;Player #{player.name} had #{player.points} points.&quot;</span> }

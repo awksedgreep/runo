@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>player.rbs - RDoc Documentation</title>
+<title>dealer.rbs - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -81,28 +81,32 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page sig/player.rbs">
+<main role="main" aria-label="Page sig/dealer.rbs">
 
-<p>class <a href="../Player.html"><code>Player</code></a></p>
+<p>class <a href="../Dealer.html"><code>Dealer</code></a></p>
 
-<pre>@total_points: Complex | Float | Integer | Rational
+<pre>@winner: bool
+@direction_name: String
+@top_card: Card
+@player: Player
+@game_end: Time
 
-attr_accessor name: String
-attr_accessor cards: Array[Card]
-attr_accessor dealer: Dealer
-attr_accessor type: String
+attr_accessor deck: Deck
+attr_accessor players: Array[Player]
+attr_accessor direction: Integer
+attr_accessor turn: Player
+attr_accessor current_player: Integer
 attr_accessor log: Logger
-attr_accessor color_playable: Array[Card]
-attr_accessor like_playable: Array[Card]
-def initialize: (log: Logger, name: String, dealer: Dealer) -&gt; void
-def draw_card: (Integer num_cards) -&gt; Integer
-def play_card: (Card top_card) -&gt; nil
-def which_card: (Card top_card) -&gt; nil
-def find_color_playable: (Card top_card) -&gt; Array[Card]
-def find_like_playable: (Card top_card) -&gt; Array[Card]
-def preferred_color: -&gt; Integer
-def points: -&gt; (Complex | Float | Integer | Rational)
-def to_s: -&gt; String</pre>
+attr_accessor total_players: Integer
+attr_accessor total_points: Complex | Float | Integer | Rational
+attr_accessor game_start: Time
+attr_accessor game_finish: Integer
+def initialize: (log: Logger, players: Array[String]) -&gt; void
+def draw_card: -&gt; void
+def increment_player: -&gt; Integer
+def change_direction: -&gt; String
+def points: -&gt; (Integer)
+def winner: -&gt; Player</pre>
 
 <p>end</p>
 

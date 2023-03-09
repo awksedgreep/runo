@@ -47,22 +47,22 @@
     <a href="TODO_rdoc.html">TODO</a>
   </li>
   <li class="file">
-    <a href="card_rbs.html">card.rbs</a>
+    <a href="sig/card_rbs.html">card.rbs</a>
   </li>
   <li class="file">
-    <a href="dealer_rbs.html">dealer.rbs</a>
+    <a href="sig/dealer_rbs.html">dealer.rbs</a>
   </li>
   <li class="file">
-    <a href="deck_rbs.html">deck.rbs</a>
+    <a href="sig/deck_rbs.html">deck.rbs</a>
   </li>
   <li class="file">
-    <a href="multirun_rbs.html">multirun.rbs</a>
-  </li>
-  <li class="file">
-    <a href="player_rbs.html">player.rbs</a>
+    <a href="sig/multirun_rbs.html">multirun.rbs</a>
   </li>
   <li class="file">
     <a href="sig/player_rbs.html">player.rbs</a>
+  </li>
+  <li class="file">
+    <a href="sig/runo_rbs.html">runo.rbs</a>
   </li>
 </ul>
 
@@ -78,13 +78,16 @@
     <a href="Deck.html">Deck</a>
   </li>
   <li class="class">
-    <a href="Object.html">Object</a>
-  </li>
-  <li class="class">
     <a href="Player.html">Player</a>
   </li>
   <li class="class">
-    <a href="TestRun.html">TestRun</a>
+    <a href="Runo.html">Runo</a>
+  </li>
+  <li class="module">
+    <a href="RunoCards.html">RunoCards</a>
+  </li>
+  <li class="class">
+    <a href="String.html">String</a>
   </li>
 </ul>
 
@@ -92,14 +95,14 @@
 <ul>
 
   <li class="method">
-    <a href="Player.html#method-c-new">::new</a>
+    <a href="Deck.html#method-c-new">::new</a>
     &mdash;
-    <span class="container">Player</span>
+    <span class="container">Deck</span>
 
   <li class="method">
-    <a href="TestRun.html#method-c-new">::new</a>
+    <a href="Runo.html#method-c-new">::new</a>
     &mdash;
-    <span class="container">TestRun</span>
+    <span class="container">Runo</span>
 
   <li class="method">
     <a href="Card.html#method-c-new">::new</a>
@@ -107,14 +110,89 @@
     <span class="container">Card</span>
 
   <li class="method">
-    <a href="Deck.html#method-c-new">::new</a>
+    <a href="Player.html#method-c-new">::new</a>
     &mdash;
-    <span class="container">Deck</span>
+    <span class="container">Player</span>
 
   <li class="method">
     <a href="Dealer.html#method-c-new">::new</a>
     &mdash;
     <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="Dealer.html#method-i-after_turn">#after_turn</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="Dealer.html#method-i-before_turn">#before_turn</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="String.html#method-i-bg_black">#bg_black</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-bg_blue">#bg_blue</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-bg_brown">#bg_brown</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-bg_cyan">#bg_cyan</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-bg_gray">#bg_gray</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-bg_green">#bg_green</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-bg_magenta">#bg_magenta</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-bg_red">#bg_red</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-black">#black</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-blink">#blink</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-blue">#blue</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-bold">#bold</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="Card.html#method-i-card_string">#card_string</a>
+    &mdash;
+    <span class="container">Card</span>
 
   <li class="method">
     <a href="Dealer.html#method-i-change_direction">#change_direction</a>
@@ -127,12 +205,22 @@
     <span class="container">Deck</span>
 
   <li class="method">
-    <a href="Deck.html#method-i-draw_card">#draw_card</a>
+    <a href="Dealer.html#method-i-create_deck">#create_deck</a>
     &mdash;
-    <span class="container">Deck</span>
+    <span class="container">Dealer</span>
 
   <li class="method">
-    <a href="Dealer.html#method-i-draw_card">#draw_card</a>
+    <a href="Dealer.html#method-i-create_players">#create_players</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="String.html#method-i-cyan">#cyan</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="Dealer.html#method-i-deal_cards">#deal_cards</a>
     &mdash;
     <span class="container">Dealer</span>
 
@@ -142,9 +230,24 @@
     <span class="container">Player</span>
 
   <li class="method">
-    <a href="Deck.html#method-i-each_card">#each_card</a>
+    <a href="Dealer.html#method-i-draw_card">#draw_card</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="Deck.html#method-i-draw_card">#draw_card</a>
     &mdash;
     <span class="container">Deck</span>
+
+  <li class="method">
+    <a href="Dealer.html#method-i-draw_four">#draw_four</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="Dealer.html#method-i-draw_two">#draw_two</a>
+    &mdash;
+    <span class="container">Dealer</span>
 
   <li class="method">
     <a href="Card.html#method-i-face_color">#face_color</a>
@@ -167,9 +270,34 @@
     <span class="container">Player</span>
 
   <li class="method">
+    <a href="Dealer.html#method-i-game_init">#game_init</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="String.html#method-i-gray">#gray</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="String.html#method-i-green">#green</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
     <a href="Dealer.html#method-i-increment_player">#increment_player</a>
     &mdash;
     <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="Dealer.html#method-i-initial_card_rules">#initial_card_rules</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="String.html#method-i-italic">#italic</a>
+    &mdash;
+    <span class="container">String</span>
 
   <li class="method">
     <a href="Deck.html#method-i-length">#length</a>
@@ -177,9 +305,29 @@
     <span class="container">Deck</span>
 
   <li class="method">
+    <a href="Dealer.html#method-i-log_after_turn">#log_after_turn</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="Dealer.html#method-i-log_before_turn">#log_before_turn</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="String.html#method-i-magenta">#magenta</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
     <a href="Player.html#method-i-play_card">#play_card</a>
     &mdash;
     <span class="container">Player</span>
+
+  <li class="method">
+    <a href="Dealer.html#method-i-play_game">#play_game</a>
+    &mdash;
+    <span class="container">Dealer</span>
 
   <li class="method">
     <a href="Card.html#method-i-point_value">#point_value</a>
@@ -202,17 +350,37 @@
     <span class="container">Player</span>
 
   <li class="method">
+    <a href="String.html#method-i-red">#red</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="Dealer.html#method-i-reverse">#reverse</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="String.html#method-i-reverse_color">#reverse_color</a>
+    &mdash;
+    <span class="container">String</span>
+
+  <li class="method">
+    <a href="Dealer.html#method-i-set_defaults">#set_defaults</a>
+    &mdash;
+    <span class="container">Dealer</span>
+
+  <li class="method">
     <a href="Deck.html#method-i-shuffle">#shuffle</a>
     &mdash;
     <span class="container">Deck</span>
 
   <li class="method">
-    <a href="Card.html#method-i-sort_val">#sort_val</a>
+    <a href="Dealer.html#method-i-skip">#skip</a>
     &mdash;
-    <span class="container">Card</span>
+    <span class="container">Dealer</span>
 
   <li class="method">
-    <a href="Card.html#method-i-to_s">#to_s</a>
+    <a href="Card.html#method-i-sort_value">#sort_value</a>
     &mdash;
     <span class="container">Card</span>
 
@@ -220,6 +388,16 @@
     <a href="Player.html#method-i-to_s">#to_s</a>
     &mdash;
     <span class="container">Player</span>
+
+  <li class="method">
+    <a href="Card.html#method-i-to_s">#to_s</a>
+    &mdash;
+    <span class="container">Card</span>
+
+  <li class="method">
+    <a href="String.html#method-i-underline">#underline</a>
+    &mdash;
+    <span class="container">String</span>
 
   <li class="method">
     <a href="Player.html#method-i-which_card">#which_card</a>
@@ -230,6 +408,11 @@
     <a href="Dealer.html#method-i-winner">#winner</a>
     &mdash;
     <span class="container">Dealer</span>
+
+  <li class="method">
+    <a href="String.html#method-i-yellow">#yellow</a>
+    &mdash;
+    <span class="container">String</span>
 </ul>
 </main>
 

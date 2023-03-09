@@ -61,7 +61,7 @@
 <div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  <p class="link"><a href="Object.html">Object</a>
+  <p class="link">Object
 </div>
 
     
@@ -73,10 +73,11 @@
 
   <ul class="link-list" role="directory">
     <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-card_string">#card_string</a>
     <li ><a href="#method-i-face_color">#face_color</a>
     <li ><a href="#method-i-face_value">#face_value</a>
     <li ><a href="#method-i-point_value">#point_value</a>
-    <li ><a href="#method-i-sort_val">#sort_val</a>
+    <li ><a href="#method-i-sort_value">#sort_value</a>
     <li ><a href="#method-i-to_s">#to_s</a>
   </ul>
 </div>
@@ -155,7 +156,7 @@
           <p>New args <a href="Card.html#attribute-i-internal_value"><code>internal_value</code></a> and color</p>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File card.rb, line 15</span>
+            <pre><span class="ruby-comment"># File lib/card.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">internal_value</span>, <span class="ruby-identifier">color</span>)
   <span class="ruby-ivar">@internal_value</span> = <span class="ruby-identifier">internal_value</span>
   <span class="ruby-ivar">@color</span> = <span class="ruby-identifier">color</span>
@@ -173,6 +174,29 @@
          <h3>Public Instance Methods</h3>
        </header>
 
+      <div id="method-i-card_string" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">card_string</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>string representation of card</p>
+
+          <div class="method-source-code" id="card_string-source">
+            <pre><span class="ruby-comment"># File lib/card.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">card_string</span>
+  <span class="ruby-node">&quot; #{face_color} #{face_value} &quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
       <div id="method-i-face_color" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
@@ -186,9 +210,9 @@
           <p>returns card color</p>
 
           <div class="method-source-code" id="face_color-source">
-            <pre><span class="ruby-comment"># File card.rb, line 33</span>
+            <pre><span class="ruby-comment"># File lib/card.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">face_color</span>
-  <span class="ruby-constant">COLORS</span>[<span class="ruby-identifier">color</span>]
+  <span class="ruby-constant">RunoCards</span><span class="ruby-operator">::</span><span class="ruby-constant">COLORS</span>[<span class="ruby-identifier">color</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -209,9 +233,9 @@
           <p>returns internal value of card</p>
 
           <div class="method-source-code" id="face_value-source">
-            <pre><span class="ruby-comment"># File card.rb, line 28</span>
+            <pre><span class="ruby-comment"># File lib/card.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">face_value</span>
-  <span class="ruby-constant">CARDS</span>[<span class="ruby-identifier">internal_value</span>]
+  <span class="ruby-constant">RunoCards</span><span class="ruby-operator">::</span><span class="ruby-constant">CARDS</span>[<span class="ruby-identifier">internal_value</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -232,10 +256,11 @@
           <p>Point value is 50 for wild cards, 20 for reverse/skip/draw 2, face value for others</p>
 
           <div class="method-source-code" id="point_value-source">
-            <pre><span class="ruby-comment"># File card.rb, line 21</span>
+            <pre><span class="ruby-comment"># File lib/card.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">point_value</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">internal_value</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">face_value</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">Integer</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-value">20</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">face_value</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Reverse&#39;</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">face_value</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Skip&#39;</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">face_value</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Draw 2&#39;</span>)
+
   <span class="ruby-value">50</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">face_value</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Wild&#39;</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">face_value</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Draw 4&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -244,10 +269,10 @@
 
       </div>
 
-      <div id="method-i-sort_val" class="method-detail ">
+      <div id="method-i-sort_value" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
-            <span class="method-name">sort_val</span><span
+            <span class="method-name">sort_value</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -256,9 +281,9 @@
         <div class="method-description">
           <p>returns a random number between 0 and 1000, used for shuffling</p>
 
-          <div class="method-source-code" id="sort_val-source">
-            <pre><span class="ruby-comment"># File card.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort_val</span>
+          <div class="method-source-code" id="sort_value-source">
+            <pre><span class="ruby-comment"># File lib/card.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort_value</span>
   <span class="ruby-identifier">rand</span>(<span class="ruby-value">1000</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -280,9 +305,9 @@
           <p>returns a string representation of the card</p>
 
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File card.rb, line 43</span>
+            <pre><span class="ruby-comment"># File lib/card.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-node">&quot; #{face_color}&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{face_value} &quot;</span>
+  <span class="ruby-node">&quot; #{face_color} #{face_value} &quot;</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">face_color</span>.<span class="ruby-identifier">downcase</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

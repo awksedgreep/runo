@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>player.rbs - RDoc Documentation</title>
+<title>runo.rbs - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -81,28 +81,18 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page sig/player.rbs">
+<main role="main" aria-label="Page sig/runo.rbs">
 
-<p>class <a href="../Player.html"><code>Player</code></a></p>
+<p>module <a href="../Runo.html"><code>Runo</code></a></p>
 
-<pre>@total_points: Complex | Float | Integer | Rational
-
-attr_accessor name: String
-attr_accessor cards: Array[Card]
-attr_accessor dealer: Dealer
-attr_accessor type: String
-attr_accessor log: Logger
-attr_accessor color_playable: Array[Card]
-attr_accessor like_playable: Array[Card]
-def initialize: (log: Logger, name: String, dealer: Dealer) -&gt; void
-def draw_card: (Integer num_cards) -&gt; Integer
-def play_card: (Card top_card) -&gt; nil
-def which_card: (Card top_card) -&gt; nil
-def find_color_playable: (Card top_card) -&gt; Array[Card]
-def find_like_playable: (Card top_card) -&gt; Array[Card]
-def preferred_color: -&gt; Integer
-def points: -&gt; (Complex | Float | Integer | Rational)
-def to_s: -&gt; String</pre>
+<pre>CARDS: [Integer, Integer, Integer, Integer, Integer, Integer,
+        Integer, Integer, Integer, Integer, String, String, String, String, String]
+COLORS: [String, String, String, String, String]
+RED: Integer
+GREEN: Integer
+BLUE: Integer
+YELLOW: Integer
+BLACK: Integer</pre>
 
 <p>end</p>
 

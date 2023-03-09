@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>player.rbs - RDoc Documentation</title>
+<title>deck.rbs - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -81,28 +81,17 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page sig/player.rbs">
+<main role="main" aria-label="Page sig/deck.rbs">
 
-<p>class <a href="../Player.html"><code>Player</code></a></p>
+<p>class <a href="../Deck.html"><code>Deck</code></a></p>
 
-<pre>@total_points: Complex | Float | Integer | Rational
-
-attr_accessor name: String
-attr_accessor cards: Array[Card]
-attr_accessor dealer: Dealer
-attr_accessor type: String
-attr_accessor log: Logger
-attr_accessor color_playable: Array[Card]
-attr_accessor like_playable: Array[Card]
-def initialize: (log: Logger, name: String, dealer: Dealer) -&gt; void
-def draw_card: (Integer num_cards) -&gt; Integer
-def play_card: (Card top_card) -&gt; nil
-def which_card: (Card top_card) -&gt; nil
-def find_color_playable: (Card top_card) -&gt; Array[Card]
-def find_like_playable: (Card top_card) -&gt; Array[Card]
-def preferred_color: -&gt; Integer
-def points: -&gt; (Complex | Float | Integer | Rational)
-def to_s: -&gt; String</pre>
+<pre>attr_accessor cards: Array[Card]
+def initialize: (Integer number_of_decks) -&gt; void
+def create_deck: (Integer number_of_decks) -&gt; Integer
+def draw_card: -&gt; nil
+def shuffle: -&gt; Array[Card]
+def each_card: -&gt; Card
+def length: -&gt; Integer</pre>
 
 <p>end</p>
 

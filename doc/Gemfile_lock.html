@@ -66,12 +66,15 @@
     <li><a href="./README_rdoc.html">README</a>
     <li><a href="./Rakefile.html">Rakefile</a>
     <li><a href="./TODO_rdoc.html">TODO</a>
-    <li><a href="./card_rbs.html">card.rbs</a>
-    <li><a href="./dealer_rbs.html">dealer.rbs</a>
-    <li><a href="./deck_rbs.html">deck.rbs</a>
-    <li><a href="./multirun_rbs.html">multirun.rbs</a>
-    <li><a href="./player_rbs.html">player.rbs</a>
-    <li><a href="./sig/player_rbs.html">player.rbs</a>
+    <li><details><summary>sig</summary>
+    <ul class="link-list">
+      <li><a href="./sig/card_rbs.html">card.rbs</a>
+      <li><a href="./sig/dealer_rbs.html">dealer.rbs</a>
+      <li><a href="./sig/deck_rbs.html">deck.rbs</a>
+      <li><a href="./sig/multirun_rbs.html">multirun.rbs</a>
+      <li><a href="./sig/player_rbs.html">player.rbs</a>
+      <li><a href="./sig/runo_rbs.html">runo.rbs</a>
+    </ul></details>
   </ul>
 </div>
 
@@ -85,14 +88,34 @@
 <pre>remote: https://rubygems.org/
 specs:
   ast (2.4.2)
+  coderay (1.1.3)
+  diff-lcs (1.5.0)
   logger (1.5.1)
+  method_source (1.0.0)
   parallel (1.22.1)
   parser (3.1.2.0)
     ast (~&gt; 2.4.1)
+  pry (0.14.2)
+    coderay (~&gt; 1.1)
+    method_source (~&gt; 1.0)
   rainbow (3.1.1)
+  rake (13.0.6)
   rbs (2.8.4)
   regexp_parser (2.3.1)
   rexml (3.2.5)
+  rspec (3.12.0)
+    rspec-core (~&gt; 3.12.0)
+    rspec-expectations (~&gt; 3.12.0)
+    rspec-mocks (~&gt; 3.12.0)
+  rspec-core (3.12.1)
+    rspec-support (~&gt; 3.12.0)
+  rspec-expectations (3.12.2)
+    diff-lcs (&gt;= 1.2.0, &lt; 2.0)
+    rspec-support (~&gt; 3.12.0)
+  rspec-mocks (3.12.3)
+    diff-lcs (&gt;= 1.2.0, &lt; 2.0)
+    rspec-support (~&gt; 3.12.0)
+  rspec-support (3.12.0)
   rubocop (1.28.2)
     parallel (~&gt; 1.10)
     parser (&gt;= 3.1.0.0)
@@ -117,6 +140,9 @@ specs:
 <p>DEPENDENCIES</p>
 
 <pre class="ruby"><span class="ruby-identifier">logger</span>
+<span class="ruby-identifier">pry</span>
+<span class="ruby-identifier">rake</span>
+<span class="ruby-identifier">rspec</span>
 <span class="ruby-identifier">rubocop</span>
 <span class="ruby-identifier">typeprof</span>
 </pre>

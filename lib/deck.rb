@@ -2,6 +2,7 @@
 
 require_relative 'card'
 
+# Module to hold card constants
 module RunoCards
   # face values for internal value
   CARDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'Reverse', 'Skip', 'Draw 2', 'Wild', 'Draw 4'].freeze
