@@ -16,9 +16,10 @@ class Runo
   def initialize(log: Logger.new('log/runo.log', 3, 1_024_000 * 3),
                  players: %w[Mark Wesley Josh Kim Nick])
     @log = log
-    @log.level = Logger::INFO
+    @log.level = Logger::WARN
     @players = players
     @game = Dealer.new(log: @log, players: @players)
+    @game.play_game
   end
 end
 

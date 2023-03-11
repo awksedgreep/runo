@@ -30,11 +30,13 @@ class Dealer
   attr_accessor :game_start
   # time the game finished
   attr_accessor :game_finish
+  # top discard card
+  attr_accessor :top_card
 
   # Create dealer, deck, add players
   def initialize(log:, players:)
     game_init(log, players)
-    play_game
+    # play_game
   end
 
   # Create a game, deck, shuffle, and deal cards
