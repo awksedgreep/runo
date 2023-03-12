@@ -50,5 +50,8 @@ describe 'Dealer' do
       dealer.play_game
       expect(dealer.winner).to be true
     end
+    it 'should have total points after a win' do
+      expect(dealer.points).to eq dealer.total_points
+    end
   end
 end
