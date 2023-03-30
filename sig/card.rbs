@@ -6,9 +6,15 @@ class Card
   attr_accessor internal_value: Integer
   attr_accessor penalized: Integer
   def initialize: (Integer internal_value, Integer color) -> void
+
+  def card_string: -> String
+
   def point_value: -> Integer
   def face_value: -> (Integer | String)
   def face_color: -> (Integer | String)
   def sort_val: -> Integer
+
+  def sort_value: -> Integer
+
   def to_s: -> String
 end

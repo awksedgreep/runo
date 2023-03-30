@@ -60,7 +60,7 @@ class Player
     wild_cards = @cards.find_all { |card| card.color == 4 }
     wild_card = wild_cards.first unless wild_cards.empty?
     wild_card.color = preferred_color unless wild_card.nil?
-    return wild_card unless wild_card.nil? # Seriously Rubocop? 'Might be unitialized' yeah you mean it might be nil?
+    return wild_card unless wild_card.nil? # Seriously Rubocop? 'Might be uninitialized' yeah you mean it might be nil?
 
     nil
   end

@@ -9,4 +9,9 @@ module Runo
   BLUE: Integer
   YELLOW: Integer
   BLACK: Integer
+
+  @players: Array[String]
+
+  attr_accessor game: Object
+  attr_accessor log: Logger
 end

@@ -1,0 +1,43 @@
+class String
+  def bg_black: -> String
+
+  def bg_blue: -> String
+
+  def bg_brown: -> String
+
+  def bg_cyan: -> String
+
+  def bg_gray: -> String
+
+  def bg_green: -> String
+
+  def bg_magenta: -> String
+
+  def bg_red: -> String
+
+  def black: -> String
+
+  def blink: -> String
+
+  def blue: -> String
+
+  def bold: -> String
+
+  def cyan: -> String
+
+  def gray: -> String
+
+  def green: -> String
+
+  def italic: -> String
+
+  def magenta: -> String
+
+  def red: -> String
+
+  def reverse_color: -> String
+
+  def underline: -> String
+
+  def yellow: -> String
+end

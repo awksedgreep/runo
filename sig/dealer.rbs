@@ -3,6 +3,10 @@ class Dealer
   @winner: bool
   @direction_name: String
   @top_card: Card
+  
+  def top_card=: -> Card
+  def top_card: -> Card
+  
   @player: Player
   @game_end: Time
 
@@ -17,9 +21,43 @@ class Dealer
   attr_accessor game_start: Time
   attr_accessor game_finish: Integer
   def initialize: (log: Logger, players: Array[String]) -> void
+
+  def after_turn: -> Integer
+
+  def before_turn: -> Integer
+
+  def create_deck: -> Array[Card]
+
+  def create_players: -> Array[Player]
+
+  def deal_cards: -> Integer
+
   def draw_card: -> void
+
+  def draw_four: -> Integer
+
+  def draw_two: -> Integer
+
+  def game_init: -> Array[Card]
+
   def increment_player: -> Integer
   def change_direction: -> String
+
+  def initial_card_rules: -> Integer
+
+  def log_after_turn: -> true
+
+  def log_before_turn: -> true
+
+  def play_game: -> Integer
+
   def points: -> (Integer)
+
+  def reverse: -> true
+
+  def set_defaults: -> Integer
+
+  def skip: -> true
+
   def winner: -> Player
 end

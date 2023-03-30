@@ -1,0 +1,9 @@
+module RunoCards
+  BLACK: Integer
+  BLUE: Integer
+  CARDS: Array[Integer | String]
+  COLORS: Array[String]
+  GREEN: Integer
+  RED: Integer
+  YELLOW: Integer
+end
