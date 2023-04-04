@@ -28,3 +28,8 @@ desc 'Console'
 task :console do
   sh 'irb -r "./runo"'
 end
+
+desc 'Lines of Code'
+task :lc do
+  sh 'wc -l *.rb */*.rb */*.rbs'
+end
