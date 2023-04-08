@@ -60,6 +60,7 @@
       <RakeTaskImpl id="rake">
         <subtasks>
           <RakeTaskImpl description="Console" fullCommand="console" id="console" />
+          <RakeTaskImpl description="Lines of Code" fullCommand="lc" id="lc" />
           <RakeTaskImpl description="Make rdocs" fullCommand="rdocs" id="rdocs" />
           <RakeTaskImpl description="Remove logs" fullCommand="rm_logs" id="rm_logs" />
           <RakeTaskImpl description="Run rubocop" fullCommand="rubocop" id="rubocop" />

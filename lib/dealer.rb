@@ -40,6 +40,7 @@ class Dealer
   end
 
   # Create a game, deck, shuffle, and deal cards
+  # noinspection RubyMismatchedVariableType
   def game_init(log, players)
     @log = log
     create_deck(players.length / 8)

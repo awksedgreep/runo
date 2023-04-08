@@ -57,8 +57,7 @@ class Player
     @like_playable = find_like_playable(top_card)
     return @like_playable.last unless @like_playable.empty? || (top_card.point_value == 50)
 
-    wild_cards = @cards.find_all { |card| card.color == 4 }
-    wild_card = wild_cards.first unless wild_cards.empty?
+    wild_card = @cards.find { |card| card.color == 4 }
     wild_card.color = preferred_color unless wild_card.nil?
     return wild_card unless wild_card.nil? # Seriously Rubocop? 'Might be uninitialized' yeah you mean it might be nil?
 
