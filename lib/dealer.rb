@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'player'
+require_relative 'human_player'
 require_relative 'deck'
 require_relative 'card'
 require_relative 'colorize'
@@ -34,17 +35,16 @@ class Dealer
   attr_accessor :top_card
 
   # Create dealer, deck, add players
-  def initialize(log:, players:)
-    game_init(log, players)
-    # play_game
+  def initialize(log:, players:, human_players:)
+    game_init(log, players, human_players)
   end
 
   # Create a game, deck, shuffle, and deal cards
   # noinspection RubyMismatchedVariableType
-  def game_init(log, players)
+  def game_init(log, players, human_players)
     @log = log
-    create_deck(players.length / 8)
-    create_players(players)
+    create_deck((players.length + human_players.length) / 8)
+    create_players(players, human_players)
     deal_cards
     set_defaults
     @top_card = @deck.draw_card
@@ -70,10 +70,13 @@ class Dealer
   end
 
   # Create the player objects
-  def create_players(players)
+  def create_players(players, human_players)
     @players = []
     players.each do |player|
       @players << Player.new(log: @log, name: player, dealer: self)
+    end
+    human_players.each do |player|
+      @players << HumanPlayer.new(log: @log, name: player, dealer: self)
     end
   end
 

@@ -10,6 +10,7 @@ module Runo
   YELLOW: Integer
   BLACK: Integer
 
+  @human_players: Array[String]
   @players: Array[String]
 
   attr_accessor game: Object

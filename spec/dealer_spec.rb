@@ -5,8 +5,8 @@ require 'logger'
 
 describe 'Dealer' do
   context 'Should have 5 players' do
-    let(:dealer) { Dealer.new(log: Logger.new(nil), players: 
-                           ['Mark', 'Kim', 'Wesley', 'Josh', 'Nick']) }
+    let(:dealer) { Dealer.new(log: Logger.new(nil), players:
+      %w[Kim Wesley Josh Nick], human_players: ['Mark']) }
     it 'should have 5 players' do
       expect(dealer.players.length).to eq 5
     end

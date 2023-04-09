@@ -6,7 +6,7 @@ require 'logger'
 describe 'Player' do
   context 'should exist' do
     let(:log) { Logger.new(nil) }
-    let(:dealer) { Dealer.new(log: log, players: ['Mark']) }
+    let(:dealer) { Dealer.new(log: log, players: ['Mark'], human_players: []) }
     let(:player) { dealer.players.first }
     it 'should the name Mark' do
       expect(player.name).to eq 'Mark'
