@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'player'
+require_relative 'player'
 
 # Human Player Object
 class HumanPlayer < Player

@@ -20,15 +20,13 @@ describe 'Player' do
     end
     it 'should play cards' do
       first_card = player.cards.first
-      top_card = first_card
-      card = player.play_card(top_card)
+      card = player.play_card(first_card)
       expect(card.class).to eq Card
       expect(player.cards.length).to eq 6
     end
     it 'should find a playable card' do
       first_card = player.cards.first
-      top_card = first_card
-      card = player.which_card(top_card)
+      card = player.which_card(first_card)
       expect(card.class).to eq Card
     end
   end
